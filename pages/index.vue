@@ -1,3 +1,7 @@
 <template>
-	<h1>Taskestan APP</h1>
+	<div>
+		<h1>Your Boards</h1>
+		
+		
+	</div>
 </template>

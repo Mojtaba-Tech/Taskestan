@@ -1,0 +1,19 @@
+@tailwind base;
+
+@layer base {
+    h1 {
+        @apply text-[40px];
+    }
+    h2 {
+        @apply text-3xl;
+    }
+    h3 {
+        @apply text-[22px] font-semibold;
+    }
+    h4 {
+        @apply text-lg font-bold;
+    }
+}
+
+@tailwind components;
+@tailwind utilities;
