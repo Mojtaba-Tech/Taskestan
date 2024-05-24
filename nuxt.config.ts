@@ -2,7 +2,12 @@
 // @ts-ignore
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/google-fonts', '@vesp/nuxt-fontawesome'],
+  modules: [
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/google-fonts',
+    '@vesp/nuxt-fontawesome',
+    "@nuxtjs/supabase"
+  ],
   googleFonts: {
     families: {
       Poppins: true,
@@ -15,5 +20,14 @@ export default defineNuxtConfig({
   },
   css: [
       '@/assets/scss/main.scss'
-  ]
+  ],
+  supabase: {
+    redirectOptions: {
+      login: '/',
+      // callback: '/confirm',
+      // include: undefined,
+      // exclude: [],
+      // cookieRedirect: false,
+    }
+  }
 })
