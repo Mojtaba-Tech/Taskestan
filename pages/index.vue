@@ -16,12 +16,26 @@
 			<!-- End Add New Board Button -->
 			
 			<!-- Boards -->
-			<template v-for="(board, index) in boards">
-				<div class="bg-white/80 rounded-medium w-[calc((100%/3)-16px)] h-56 p-4 border-t-8 border-2 border-slate-600/80 mb-3 mx-2">
+			<!-- Board Items -->
+			<template v-for="(board, index) in boards" v-if="!isLoadingBoards">
+				<div class="bg-white/80 hover:bg-white transition rounded-medium w-[calc((100%/3)-16px)] h-56 p-4 border-t-8 border-2 border-slate-600/80 mb-3 mx-2">
 					<h2 class="mb-3">{{ board.title }}</h2>
 					<p>{{ board.brief }}</p>
 				</div>
 			</template>
+			<!-- End Board Items -->
+			
+			<!-- Loading -->
+			<template v-else>
+				<div class="flex items-center bg-white/80 rounded-medium w-[calc((100%/3)-16px)] h-56 p-4 border-t-8 border-2 border-slate-600/80 mb-3 mx-2">
+					<Vue3Lottie
+					  :animationLink="loadingJsonURL"
+					  :width="300"
+					  :height="300"
+					/>
+				</div>
+			</template>
+			<!-- End Loading -->
 			<!-- End Boards -->
 		
 		</section>
@@ -30,10 +44,16 @@
 
 <script setup>
 import {faPlus} from '@fortawesome/free-solid-svg-icons'
+import {Vue3Lottie} from "vue3-lottie";
+
+const loadingJsonURL = new URL('~/assets/lottie/loading.json', import.meta.url)?.href
+const {isLoadingBoards} = storeToRefs(useBoardsStore())
 
 const boards = ref([])
 onMounted(async () => {
+	isLoadingBoards.value = true;
 	boards.value = await $fetch('/api/boards', {method: "GET"})
+	isLoadingBoards.value = false;
 })
 
 // todo: should be added in login page

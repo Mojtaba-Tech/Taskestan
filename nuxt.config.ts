@@ -6,7 +6,8 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxtjs/google-fonts',
     '@vesp/nuxt-fontawesome',
-    "@nuxtjs/supabase"
+    "@nuxtjs/supabase",
+    "@pinia/nuxt"
   ],
   googleFonts: {
     families: {
@@ -24,7 +25,7 @@ export default defineNuxtConfig({
   supabase: {
     redirectOptions: {
       login: '/',
-      // callback: '/confirm',
+      callback: '/confirm',
       // include: undefined,
       // exclude: [],
       // cookieRedirect: false,
