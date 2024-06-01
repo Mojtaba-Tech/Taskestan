@@ -7,7 +7,10 @@
 		<section class="flex flex-wrap py-10">
 			
 			<!-- Add New Board Button -->
-			<div class="flex justify-center items-center bg-white/90 hover:bg-white transition cursor-pointer rounded-medium w-[calc((100%/3)-16px)] h-56 p-4 border-4 border-slate-600/80 mb-3 mx-2">
+			<div
+			  class="flex justify-center items-center bg-white/90 hover:bg-white transition cursor-pointer rounded-medium w-[calc((100%/3)-16px)] h-56 p-4 border-4 border-slate-600/80 mb-3 mx-2"
+			  @click="isBoardAddModalVisible = true"
+			>
 				<div class="text-center text-slate-600/90">
 					<font-awesome :icon="faPlus" size="3x"/>
 					<h3 class="mt-2">Add new board</h3>
@@ -39,6 +42,13 @@
 			<!-- End Boards -->
 		
 		</section>
+		
+		<!-- Board Add Modal -->
+		<BoardAdd
+		  v-model:is-visible="isBoardAddModalVisible"
+		/>
+		<!-- End Board Add Modal -->
+	
 	</div>
 </template>
 
@@ -48,6 +58,7 @@ import {Vue3Lottie} from "vue3-lottie";
 
 const loadingJsonURL = new URL('~/assets/lottie/loading.json', import.meta.url)?.href
 const {isLoadingBoards} = storeToRefs(useBoardsStore())
+const isBoardAddModalVisible = ref(false)
 
 const boards = ref([])
 onMounted(async () => {
