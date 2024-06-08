@@ -1,27 +1,27 @@
 <template>
 	<label v-if="hasLabel" :for="id" class="text-gray-600">{{ labelText }}</label>
-	<input
+	<textarea
 	  class="border-2 transition w-full outline-0 rounded-small py-2 px-2.5"
 	  :class="[...themeCssClassList, ...customClassList]"
-	  :type="type"
 	  :id="id"
 	  :placeholder="placeholder"
+	  :rows="rows"
 	  v-model="model"
-	>
+	></textarea>
 </template>
 
 <script setup lang="ts">
-import type {PublicInput} from "~/types/form"
+import type {PublicTextarea} from "~/types/form"
 
 const model = defineModel();
 
-const props = withDefaults(defineProps<PublicInput>(), {
-	type: 'text',
+const props = withDefaults(defineProps<PublicTextarea>(), {
 	placeholder: 'Enter your text...',
 	hasLabel: true,
 	labelText: 'input label',
 	theme: 'primary',
-	customClassList: () => []
+	customClassList: () => [],
+	rows: 6
 })
 
 let themeCssClassList: string[] = []

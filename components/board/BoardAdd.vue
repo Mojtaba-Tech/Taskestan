@@ -36,13 +36,13 @@
 							/>
 						</div>
 						<div class="mb-3">
-							<label for="brief" class="text-gray-600">Description</label>
-							<textarea
-							  class="border-2 border-gray-300 transition focus:border-gray-400 focus:bg-gray-100/70 w-full outline-0 rounded-small py-2 px-2.5"
-							  id="brief"
-							  rows="7"
+							<PublicTextarea
 							  placeholder="Enter board description..."
-							></textarea>
+							  :rows="7"
+							  id="description"
+							  labelText="Description"
+							  v-model="form.description"
+							/>
 						</div>
 						<button
 						  class="bg-green-700 text-white rounded-small transition hover:bg-green-600 px-10 py-2"

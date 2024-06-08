@@ -1,11 +1,21 @@
-export interface Input {
+export interface PublicInput {
     type: InputTypes,
     theme: 'primary',
-    customClassList: Array<string>,
+    customClassList: string[],
     id: string,
     hasLabel: boolean,
     labelText: string,
     placeholder: string
+}
+
+export interface PublicTextarea {
+    theme: 'primary',
+    customClassList: string[],
+    id: string,
+    hasLabel: boolean,
+    labelText: string,
+    placeholder: string,
+    rows: number
 }
 
 export type InputTypes =
@@ -31,3 +41,5 @@ export type InputTypes =
     | 'time'
     | 'url'
     | 'week';
+
+
