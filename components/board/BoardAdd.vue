@@ -18,24 +18,22 @@
 			  class="h-screen fixed right-0 w-1/2 top-0 bg-white"
 			>
 				<section class="overflow-y-auto h-full p-4">
-					<form>
+					<form @submit.prevent="submitForm">
 						<div class="mb-3">
-							<label for="title" class="text-gray-600">Title</label>
-							<input
-							  class="border-2 border-gray-300 transition focus:border-gray-400 focus:bg-gray-100/70 w-full outline-0 rounded-small py-2 px-2.5"
-							  type="text"
-							  id="title"
+							<PublicInput
 							  placeholder="Enter board title..."
-							>
+							  id="title"
+							  labelText="Title"
+							  v-model="form.title"
+							/>
 						</div>
 						<div class="mb-3">
-							<label for="brief" class="text-gray-600">Brief</label>
-							<input
-							  class="border-2 border-gray-300 transition focus:border-gray-400 focus:bg-gray-100/70 w-full outline-0 rounded-small py-2 px-2.5"
-							  type="text"
-							  id="brief"
+							<PublicInput
 							  placeholder="Enter board brief..."
-							>
+							  id="brief"
+							  labelText="Brief"
+							  v-model="form.brief"
+							/>
 						</div>
 						<div class="mb-3">
 							<label for="brief" class="text-gray-600">Description</label>
@@ -48,6 +46,7 @@
 						</div>
 						<button
 						  class="bg-green-700 text-white rounded-small transition hover:bg-green-600 px-10 py-2"
+						  type="submit"
 						>Add Board
 						</button>
 					</form>
@@ -68,6 +67,15 @@
 
 const isVisible = defineModel('isVisible')
 
+const form = {
+	title: '',
+	brief: '',
+	description: ''
+}
+
+function submitForm() {
+	console.log(form)
+}
 </script>
 
 <style lang="scss">
