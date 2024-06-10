@@ -18,6 +18,14 @@ export interface PublicTextarea {
     rows: number
 }
 
+export interface PublicButton {
+    buttonText: string,
+    type: 'button' | 'submit' | 'reset',
+    theme: 'primary' | 'success' | 'warning' | 'danger',
+    customClassList: string[],
+    clicked: () => void
+}
+
 export type InputTypes =
     | 'button'
     | 'checkbox'

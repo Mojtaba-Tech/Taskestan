@@ -44,11 +44,11 @@
 							  v-model="form.description"
 							/>
 						</div>
-						<button
-						  class="bg-green-700 text-white rounded-small transition hover:bg-green-600 px-10 py-2"
-						  type="submit"
-						>Add Board
-						</button>
+						<PublicButton
+							type="submit"
+							:clicked="submitForm"
+							buttonText="Add Board"
+						/>
 					</form>
 				</section>
 			</section>
