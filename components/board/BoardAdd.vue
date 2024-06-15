@@ -73,8 +73,14 @@ const form = {
 	description: ''
 }
 
-function submitForm() {
+async function submitForm() {
 	console.log(form)
+	const data = await $fetch('/api/boards', {
+		method: "POST",
+		body: form
+	})
+	
+	console.log("datta", data)
 }
 </script>
 
