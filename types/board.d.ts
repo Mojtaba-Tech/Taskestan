@@ -1,4 +1,4 @@
-export interface Board {
+export interface BoardModel {
     id: number,
     title: string,
     brief: string,

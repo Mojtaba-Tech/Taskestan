@@ -57,7 +57,7 @@ import {faPlus} from '@fortawesome/free-solid-svg-icons'
 import {Vue3Lottie} from "vue3-lottie";
 
 const loadingJsonURL = new URL('~/assets/lottie/loading.json', import.meta.url)?.href
-const {isLoadingBoards} = storeToRefs(useBoardsStore())
+const {isLoadingBoards} = storeToRefs(useBoardStore())
 const isBoardAddModalVisible = ref(false)
 
 const boards = ref([])

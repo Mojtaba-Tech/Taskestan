@@ -1,4 +1,4 @@
-export const useBoardsStore = defineStore('boards', () => {
+export const useBoardStore = defineStore('boards', () => {
     const isLoadingBoards = ref(false)
 
     return {

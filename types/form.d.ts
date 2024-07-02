@@ -1,4 +1,4 @@
-export interface PublicInput {
+export interface PublicInputModel {
     type: InputTypes,
     theme: 'primary',
     customClassList: string[],
@@ -8,7 +8,7 @@ export interface PublicInput {
     placeholder: string
 }
 
-export interface PublicTextarea {
+export interface PublicTextareaModel {
     theme: 'primary',
     customClassList: string[],
     id: string,
@@ -18,7 +18,7 @@ export interface PublicTextarea {
     rows: number
 }
 
-export interface PublicButton {
+export interface PublicButtonModel {
     buttonText: string,
     type: 'button' | 'submit' | 'reset',
     theme: 'primary' | 'success' | 'warning' | 'danger',
@@ -26,7 +26,7 @@ export interface PublicButton {
     clicked: () => void
 }
 
-export type InputTypes =
+export type InputTypesModel =
     | 'button'
     | 'checkbox'
     | 'color'

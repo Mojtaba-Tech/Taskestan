@@ -11,11 +11,11 @@
 </template>
 
 <script setup lang="ts">
-import type {PublicTextarea} from "~/types/form"
+import type {PublicTextareaModel} from "~/types/form"
 
 const model = defineModel();
 
-const props = withDefaults(defineProps<PublicTextarea>(), {
+const props = withDefaults(defineProps<PublicTextareaModel>(), {
 	placeholder: 'Enter your text...',
 	hasLabel: true,
 	labelText: 'input label',

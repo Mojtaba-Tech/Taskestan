@@ -10,13 +10,13 @@
 </template>
 
 <script setup lang="ts">
-import type {PublicButton} from "~/types/form"
+import type {PublicButtonModel} from "~/types/form"
 
 defineOptions({
 	inheritAttrs: false
 })
 
-const props = withDefaults(defineProps<PublicButton>(), {
+const props = withDefaults(defineProps<PublicButtonModel>(), {
 	type: 'button',
 	theme: 'primary',
 	customClassList: () => [],

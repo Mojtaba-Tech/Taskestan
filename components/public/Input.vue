@@ -11,11 +11,11 @@
 </template>
 
 <script setup lang="ts">
-import type {PublicInput} from "~/types/form"
+import type {PublicInputModel} from "~/types/form"
 
 const model = defineModel();
 
-const props = withDefaults(defineProps<PublicInput>(), {
+const props = withDefaults(defineProps<PublicInputModel>(), {
 	type: 'text',
 	placeholder: 'Enter your text...',
 	hasLabel: true,
