@@ -25,7 +25,7 @@
 				
 				<!-- Loading -->
 				<template v-else>
-					<div class="flex items-center bg-white/80 rounded-medium w-[calc((100%/5)-16px)] h-64 p-4 border-t-8 border-2 border-slate-600/80 mb-3 mx-2">
+					<div class="flex items-center bg-white/80 rounded-medium w-[calc((100%/5)-16px)] h-64 p-4 border border-gray-300 mb-3 mx-2">
 						<Vue3Lottie
 							:animationLink="loadingJsonURL"
 							:width="208"

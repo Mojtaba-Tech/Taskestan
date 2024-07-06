@@ -1,0 +1,24 @@
+<template>
+	<svg xmlns="http://www.w3.org/2000/svg" :width="width" :height="height" viewBox="0 0 16 16" fill="none">
+		<path d="M0.75 2.5C0.75 1.5335 1.5335 0.75 2.5 0.75H13.5C14.4665 0.75 15.25 1.5335 15.25 2.5V13.5C15.25 14.4665 14.4665 15.25 13.5 15.25H2.5C1.5335 15.25 0.75 14.4665 0.75 13.5V2.5Z" :stroke="color" :stroke-width="strokeWidth"/>
+		<rect x="7" y="16" width="1.5" height="16" rx="0.75" transform="rotate(180 7 16)" :fill="color"/>
+	</svg>
+	
+	<svg xmlns="http://www.w3.org/2000/svg" :width="width" :height="height" viewBox="0 0 16 16" fill="none">
+		<circle cx="8" cy="8" r="7.25" :stroke="color" :stroke-width="strokeWidth"/>
+		<circle cx="8" cy="8" r="3.25" :stroke="color" :stroke-width="strokeWidth"/>
+		<path fill-rule="evenodd" clip-rule="evenodd"
+		      d="M3.53033 2.46967C3.23744 2.17678 2.76256 2.17678 2.46967 2.46967C2.17678 2.76256 2.17678 3.23744 2.46967 3.53033L4.69112 5.75178C4.97479 5.3351 5.3351 4.97479 5.75178 4.69112L3.53033 2.46967ZM10.2482 4.69112C10.6649 4.97479 11.0252 5.3351 11.3089 5.75178L13.5303 3.53033C13.8232 3.23744 13.8232 2.76256 13.5303 2.46967C13.2374 2.17678 12.7626 2.17678 12.4697 2.46967L10.2482 4.69112ZM11.3089 10.2482C11.0252 10.6649 10.6649 11.0252 10.2482 11.3089L12.4697 13.5303C12.7626 13.8232 13.2374 13.8232 13.5303 13.5303C13.8232 13.2374 13.8232 12.7626 13.5303 12.4697L11.3089 10.2482ZM5.75178 11.3089C5.3351 11.0252 4.97479 10.6649 4.69112 10.2482L2.46967 12.4697C2.17678 12.7626 2.17678 13.2374 2.46967 13.5303C2.76256 13.8232 3.23744 13.8232 3.53033 13.5303L5.75178 11.3089Z" :fill="color"/>
+	</svg>
+</template>
+
+<script setup lang="ts">
+import type {IconModel} from "~/types/icon";
+
+withDefaults(defineProps<IconModel>(), {
+	width: 16,
+	height: 16,
+	color: '#2386F8',
+	strokeWidth: 1.5
+})
+</script>
