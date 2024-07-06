@@ -11,13 +11,13 @@ export default defineNuxtConfig({
   ],
   googleFonts: {
     families: {
-      Poppins: true,
+      "Josefin Sans": true,
     }
   },
   app: {
     head: {
       title: 'Taskestan'
-    }
+    },
   },
   css: [
       '@/assets/scss/main.scss'
