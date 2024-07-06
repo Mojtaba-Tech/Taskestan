@@ -1,6 +1,6 @@
 export interface IconModel {
   width: number,
   height: number,
-  stroke: string,
+  color: string,
   strokeWidth: number
 }
