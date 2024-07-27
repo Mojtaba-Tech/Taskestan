@@ -58,8 +58,6 @@ definePageMeta({
 	layout: 'board-layout',
 })
 
-// const dayjs = useDayjs()
-
 const loadingJsonURL = new URL('~/assets/lottie/loading.json', import.meta.url)?.href
 const {isLoadingBoards} = storeToRefs(useBoardStore())
 const isBoardAddModalVisible = ref(false)
