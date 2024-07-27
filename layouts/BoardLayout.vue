@@ -1,13 +1,13 @@
 <template>
-	<div class="bg-gray-100">
+	<div class="bg-gray-200">
 		
 		<!-- Navigation -->
 		<BoardLayoutNavigation/>
 		<!-- End Navigation -->
 		
 		<!-- Page Content -->
-		<main class="ml-[268px] p-1.5">
-			<section class="rounded-lg bg-white p-16 h-[calc(100vh-12px)] overflow-auto shadow-1">
+		<main class="px-1.5 pb-1.5">
+			<section class="rounded-lg bg-white p-16 min-h-[calc(100vh-44px)] shadow-1">
 				<slot/>
 			</section>
 		</main>
@@ -17,6 +17,5 @@
 </template>
 
 <script setup>
-
 import BoardLayoutNavigation from "~/components/board/BoardLayoutNavigation.vue";
 </script>

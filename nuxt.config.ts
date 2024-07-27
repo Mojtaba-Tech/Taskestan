@@ -7,11 +7,12 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     '@vesp/nuxt-fontawesome',
     "@nuxtjs/supabase",
-    "@pinia/nuxt"
+    "@pinia/nuxt",
+    "dayjs-nuxt"
   ],
   googleFonts: {
     families: {
-      "Josefin Sans": true,
+      Roboto: true,
     }
   },
   app: {
@@ -25,7 +26,7 @@ export default defineNuxtConfig({
   supabase: {
     redirectOptions: {
       login: '/',
-      callback: '/confirm',
+      callback: '/',
       // include: undefined,
       // exclude: [],
       // cookieRedirect: false,

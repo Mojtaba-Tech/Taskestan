@@ -4,7 +4,7 @@
 				
 				<!-- Add New Board Button -->
 				<div
-					class="flex justify-center items-center text-slate-600 hover:bg-slate-600 hover:text-white transition cursor-pointer rounded-medium w-[calc((100%/5)-16px)] h-64 p-4 border-4 border-slate-600/80 mb-3 mx-2"
+					class="flex justify-center items-center text-slate-600 hover:bg-slate-600 hover:text-white transition cursor-pointer rounded-medium w-[calc((100%/5)-16px)] h-64 p-4 border-4 border-slate-600/80 mb-3 mr-4"
 					@click="isBoardAddModalVisible = true"
 				>
 					<div class="text-center">
@@ -14,18 +14,21 @@
 				</div>
 				<!-- End Add New Board Button -->
 				
-				<!-- Boards -->
 				<!-- Board Items -->
 				<template v-for="(board, index) in boards" v-if="!isLoadingBoards">
-					<div class="flex items-end bg-white/80 hover:bg-gray-100 transition rounded-medium w-[calc((100%/5)-16px)] h-64 p-4 border border-gray-300 mb-3 mx-2">
-						<h2 class="text-sm">{{ board.title }}</h2>
+					<div class="flex flex-col justify-end bg-white/80 hover:bg-gray-100 transition rounded-medium w-[calc((100%/5)-16px)] h-64 p-4 border border-gray-300 mb-3 mr-4 cursor-pointer">
+						<h2 class="text-sm text-gray-600">{{ board.title }}</h2>
+						<p
+							v-if="board.updated_at"
+							class="text-gray-400"
+						>Last modified {{$dayjs(board.updated_at).fromNow()}}</p>
 					</div>
 				</template>
 				<!-- End Board Items -->
 				
 				<!-- Loading -->
 				<template v-else>
-					<div class="flex items-center bg-white/80 rounded-medium w-[calc((100%/5)-16px)] h-64 p-4 border border-gray-300 mb-3 mx-2">
+					<div class="flex items-center bg-white/80 rounded-medium w-[calc((100%/5)-16px)] h-64 p-4 border border-gray-300 mb-3 mr-4 cursor-pointer">
 						<Vue3Lottie
 							:animationLink="loadingJsonURL"
 							:width="208"
@@ -34,7 +37,6 @@
 					</div>
 				</template>
 				<!-- End Loading -->
-				<!-- End Boards -->
 			
 			</section>
 			
@@ -56,6 +58,8 @@ definePageMeta({
 	layout: 'board-layout',
 })
 
+// const dayjs = useDayjs()
+
 const loadingJsonURL = new URL('~/assets/lottie/loading.json', import.meta.url)?.href
 const {isLoadingBoards} = storeToRefs(useBoardStore())
 const isBoardAddModalVisible = ref(false)
@@ -67,16 +71,5 @@ onMounted(async () => {
 	isLoadingBoards.value = false;
 })
 
-// todo: should be added in login page
-// const supabase = useSupabaseClient()
-// const signInWithOAuth = async () => {
-// 	const {error} = await supabase.auth.signInWithOAuth({
-// 		provider: 'github',
-// 		options: {
-// 			redirectTo: 'http://localhost:3005/confirm',
-// 		},
-// 	})
-// 	if (error) console.log(error)
-// }
-// signInWithOAuth()
+
 </script>

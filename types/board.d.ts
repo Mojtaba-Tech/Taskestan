@@ -6,5 +6,6 @@ export interface BoardModel {
     order: number,
     owner_id: string,
     settings: object | null,
-    created_at: string
+    created_at: string,
+    updated_at: string,
 }
