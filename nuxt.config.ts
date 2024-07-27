@@ -26,7 +26,7 @@ export default defineNuxtConfig({
   supabase: {
     redirectOptions: {
       login: '/auth/login',
-      callback: '/app/boards/boards-list',
+      callback: '/auth/signup',
       // include: undefined,
       // exclude: [],
       // cookieRedirect: false,
