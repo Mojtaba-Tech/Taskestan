@@ -4,7 +4,7 @@
 				
 				<!-- Add New Board Button -->
 				<div
-					class="flex justify-center items-center text-slate-600 hover:bg-slate-600 hover:text-white transition cursor-pointer rounded-medium w-[calc((100%/5)-16px)] h-64 p-4 border-4 border-slate-600/80 mb-3 mr-4"
+					class="flex justify-center items-center text-cyan-800 hover:bg-cyan-800 hover:text-white transition cursor-pointer rounded-medium w-[calc((100%/5)-16px)] h-64 p-4 border-4 border-cyan-800 mb-3 mr-4"
 					@click="isBoardCreateModalVisible = true"
 				>
 					<div class="text-center">
@@ -16,7 +16,7 @@
 				
 				<!-- Board Items -->
 				<template v-for="(board, index) in boards" v-if="!isGetBoardsLoading">
-					<div class="flex flex-col justify-end bg-white/80 hover:bg-gray-100 transition rounded-medium w-[calc((100%/5)-16px)] h-64 p-4 border border-gray-300 mb-3 mr-4 cursor-pointer">
+					<div class="flex flex-col justify-end bg-white hover:bg-black/5 transition rounded-medium w-[calc((100%/5)-16px)] h-64 p-4 border border-black/15 shadow-1 mb-3 mr-4 cursor-pointer">
 						<h2 class="text-sm text-gray-600">{{ board.title }}</h2>
 						<p
 							v-if="board.updated_at"

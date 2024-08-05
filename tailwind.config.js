@@ -123,6 +123,8 @@ export default {
         800: '#009820',
         900: '#007808'
       },
+      white: '#ffffff',
+      black: '#000000'
     },
     extend: {
       borderRadius: {

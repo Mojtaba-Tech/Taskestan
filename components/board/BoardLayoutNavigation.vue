@@ -1,5 +1,5 @@
 <template>
-	<nav class="px-3 bg-gray-100 py-2.5">
+	<nav class="px-3 py-2.5">
 		
 		<!-- Menu Links -->
 		<ul class="flex justify-center">
