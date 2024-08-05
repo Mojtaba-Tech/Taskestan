@@ -7,5 +7,5 @@
 </template>
 
 <script setup lang="ts">
-console.log(useSupabaseClient())
+// console.log(useSupabaseClient())
 </script>

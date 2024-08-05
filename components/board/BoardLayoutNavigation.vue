@@ -32,12 +32,11 @@
 </template>
 
 <script setup lang="ts">
-console.log(useRoute())
 const route = useRoute()
 
 const getIconColor = (routeName: string) => {
 	const isRouteMatched = route.matched.some((matchedItem) => matchedItem.name === routeName)
-	console.log("isRouteMatched", isRouteMatched)
+	// console.log("isRouteMatched", isRouteMatched)
 	return isRouteMatched ? '#2386F8' : '#C6C7CE'
 }
 </script>

@@ -5,7 +5,7 @@
 				<!-- Add New Board Button -->
 				<div
 					class="flex justify-center items-center text-slate-600 hover:bg-slate-600 hover:text-white transition cursor-pointer rounded-medium w-[calc((100%/5)-16px)] h-64 p-4 border-4 border-slate-600/80 mb-3 mr-4"
-					@click="isBoardAddModalVisible = true"
+					@click="isBoardCreateModalVisible = true"
 				>
 					<div class="text-center">
 						<font-awesome :icon="faPlus" size="2x"/>
@@ -15,7 +15,7 @@
 				<!-- End Add New Board Button -->
 				
 				<!-- Board Items -->
-				<template v-for="(board, index) in boards" v-if="!isLoadingBoards">
+				<template v-for="(board, index) in boards" v-if="!isGetBoardsLoading">
 					<div class="flex flex-col justify-end bg-white/80 hover:bg-gray-100 transition rounded-medium w-[calc((100%/5)-16px)] h-64 p-4 border border-gray-300 mb-3 mr-4 cursor-pointer">
 						<h2 class="text-sm text-gray-600">{{ board.title }}</h2>
 						<p
@@ -40,11 +40,11 @@
 			
 			</section>
 			
-			<!-- Board Add Modal -->
-			<BoardAdd
-				v-model:is-visible="isBoardAddModalVisible"
+			<!-- Board Create Modal -->
+			<BoardCreateModal
+				v-model:is-board-create-visible="isBoardCreateModalVisible"
 			/>
-			<!-- End Board Add Modal -->
+			<!-- End Board Create Modal -->
 		
 	</div>
 </template>
@@ -58,16 +58,19 @@ definePageMeta({
 	layout: 'board-layout',
 })
 
+const isBoardCreateModalVisible = ref(false)
+
 const loadingJsonURL = new URL('~/assets/lottie/loading.json', import.meta.url)?.href
-const {isLoadingBoards} = storeToRefs(useBoardStore())
-const isBoardAddModalVisible = ref(false)
 
-const boards: Ref<BoardModel[]> = ref([])
+const boardStore = useBoardStore()
+const boardStoreRefs = storeToRefs(boardStore)
+const boards = boardStoreRefs.boards
+const isGetBoardsLoading = boardStoreRefs.isGetBoardsLoading;
+
 onMounted(async () => {
-	isLoadingBoards.value = true;
-	boards.value = await $fetch('/api/boards', {method: "GET"})
-	isLoadingBoards.value = false;
+	boardStore.getBoards()
+	// isGetBoardsLoading.value = true;
+	// boards.value = await $fetch('/api/boards', {method: "GET"})
+	// isGetBoardsLoading.value = false;
 })
-
-
 </script>

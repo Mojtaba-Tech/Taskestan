@@ -36,7 +36,7 @@ const form = {
 }
 
 const signUp = async () => {
-	console.log(form)
+	// console.log(form)
 	
 	
 	const { data, error } = await supabase.auth.signUp({
@@ -44,6 +44,6 @@ const signUp = async () => {
 		password: form.password
 	})
 	
-	console.log(data, error)
+	// console.log(data, error)
 }
 </script>

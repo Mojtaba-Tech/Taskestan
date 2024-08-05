@@ -54,7 +54,7 @@ onBeforeMount(async () => {
 async function checkDoesUserLogged() {
 	const {data: {user}} = await useSupabaseClient().auth.getUser()
 	
-	console.log("--->", user, !!user)
+	// console.log("--->", user, !!user)
 	return !!user;
 }
 
@@ -73,14 +73,12 @@ onMounted(() => {
 	// signInWithOAuth()
 })
 
-console.log("user", )
-
 const signIn = async () => {
 	const { data, error } = await supabase.auth.signInWithPassword({
 		email: form.email,
 		password: form.password,
 	})
-	console.log("sign in -> ", data, error)
+	// console.log("sign in -> ", data, error)
 	if(!error) {
 		navigateTo('/app/boards/boards-list')
 	} else {

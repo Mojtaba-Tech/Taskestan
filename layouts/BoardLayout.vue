@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-gray-200">
+	<div class="bg-gray-100">
 		
 		<!-- Navigation -->
 		<BoardLayoutNavigation/>

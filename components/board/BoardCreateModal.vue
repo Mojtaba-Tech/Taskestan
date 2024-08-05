@@ -4,8 +4,8 @@
 		<!-- Modal Overlay -->
 		<Transition name="overlay">
 			<section
-			  v-if="isVisible"
-			  @click="isVisible = false"
+			  v-if="isBoardCreateVisible"
+			  @click="isBoardCreateVisible = false"
 			  class="fixed w-full h-screen right-0 top-0 bg-gray-600/60"
 			></section>
 		</Transition>
@@ -14,11 +14,11 @@
 		<!-- Modal Content -->
 		<Transition name="modal-content">
 			<section
-			  v-if="isVisible"
+			  v-if="isBoardCreateVisible"
 			  class="h-screen fixed right-0 w-1/2 top-0 bg-white"
 			>
 				<section class="overflow-y-auto h-full p-4">
-					<form @submit.prevent="submitForm">
+					<form ref="createBoardForm" @submit.prevent="submitForm">
 						<div class="mb-3">
 							<PublicInput
 							  placeholder="Enter board title..."
@@ -59,28 +59,32 @@
 </template>
 
 <script lang="ts" setup>
-// const {
-// 	isVisible = false
-// } = defineProps<{
-// 	isVisible: boolean
-// }>()
+const isBoardCreateVisible: Ref<boolean> = defineModel('isBoardCreateVisible', {required: true})
 
-const isVisible = defineModel('isVisible')
+const createBoardForm = ref()
 
-const form = {
+let form = {
 	title: '',
 	brief: '',
 	description: ''
 }
 
+const boardStore = useBoardStore()
+
 async function submitForm() {
-	console.log(form)
-	const data = await $fetch('/api/boards', {
-		method: "POST",
-		body: form
-	})
-	
-	console.log("datta", data)
+	if(form.title) {
+		await boardStore.createBoard(form)
+		
+		form = {
+			title: '',
+			brief: '',
+			description: ''
+		}
+		
+		isBoardCreateVisible.value = false;
+	} else {
+		alert("Title is required")
+	}
 }
 </script>
 
