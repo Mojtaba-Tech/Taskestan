@@ -26,7 +26,7 @@ export const useBoardStore = defineStore('boards', () => {
 
     return $fetch('/api/boards', {method: "POST", body: requestBody})
       .then((response: any) => {
-        console.log("response", response.data[0])
+        console.log("response", response.data)
 
         boards.value.push(response.data[0])
       })
