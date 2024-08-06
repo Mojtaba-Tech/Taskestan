@@ -1,26 +1,26 @@
 <template>
-	<nav class="px-3 py-2.5">
+	<nav class="flex justify-center items-center h-9">
 		
 		<!-- Menu Links -->
 		<ul class="flex justify-center">
 			<li class="mx-2">
 				<NuxtLink
-					:to="{name: 'app-boards-boards-list'}"
+					:to="{name: 'app-boards-list'}"
 					class="transition"
 				>
 					<IconsMultipleCard4
-						:color="getIconColor('app-boards-boards-list')"
+						:color="getIconColor('app-boards-list')"
 						class="transition"
 					/>
 				</NuxtLink>
 			</li>
 			<li class="mx-2">
 				<NuxtLink
-					:to="{name: 'app-settings-settings'}"
+					:to="{name: 'app-settings'}"
 					class="transition"
 				>
 					<IconsSetting3
-						:color="getIconColor('app-settings-settings')"
+						:color="getIconColor('app-settings')"
 						class="transition"
 					/>
 				</NuxtLink>

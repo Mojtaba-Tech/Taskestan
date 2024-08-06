@@ -39,7 +39,7 @@ const signInWithOAuth = async () => {
 	const {error} = await supabase.auth.signInWithOAuth({
 		provider: 'github',
 		options: {
-			redirectTo: 'http://localhost:3005/app/boards/boards-list',
+			redirectTo: 'http://localhost:3005/app/boards/list',
 		},
 	})
 	if (error) console.log(error)
@@ -64,7 +64,7 @@ definePageMeta({
 		const isUserLogged = !!user
 
 		if(isUserLogged) {
-			return navigateTo('/app/boards/boards-list')
+			return navigateTo('/app/boards/list')
 		}
 	}
 })
@@ -80,7 +80,7 @@ const signIn = async () => {
 	})
 	// console.log("sign in -> ", data, error)
 	if(!error) {
-		navigateTo('/app/boards/boards-list')
+		navigateTo('/app/boards/list')
 	} else {
 		alert(error)
 	}

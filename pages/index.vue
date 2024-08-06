@@ -4,7 +4,7 @@
 </template>
 
 <script setup lang="ts">
-onBeforeMount(() => navigateTo({name: 'app-boards-boards-list'}))
+onBeforeMount(() => navigateTo({name: 'app-boards-list'}))
 
 
 </script>

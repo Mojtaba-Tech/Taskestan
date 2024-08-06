@@ -5,6 +5,7 @@ export const useBoardStore = defineStore('boards', () => {
   const boards = ref<BoardModel[]>([])
   const isGetBoardsLoading = ref(false)
   const isCreateBoardLoading = ref(false)
+  const selectedBoardId = ref<number>(0)
 
   const getBoards = () => {
     isGetBoardsLoading.value = true;
@@ -26,7 +27,7 @@ export const useBoardStore = defineStore('boards', () => {
 
     return $fetch('/api/boards', {method: "POST", body: requestBody})
       .then((response: any) => {
-        console.log("response", response.data)
+        // console.log("response", response.data)
 
         boards.value.push(response.data[0])
       })
@@ -42,6 +43,7 @@ export const useBoardStore = defineStore('boards', () => {
     boards,
     getBoards,
     createBoard,
+    selectedBoardId,
     isGetBoardsLoading
   }
 })

@@ -124,7 +124,8 @@ export default {
         900: '#007808'
       },
       white: '#ffffff',
-      black: '#000000'
+      black: '#000000',
+      transparent: 'transparent'
     },
     extend: {
       borderRadius: {

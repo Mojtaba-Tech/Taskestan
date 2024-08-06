@@ -15,14 +15,20 @@
 				<!-- End Add New Board Button -->
 				
 				<!-- Board Items -->
-				<template v-for="(board, index) in boards" v-if="!isGetBoardsLoading">
-					<div class="flex flex-col justify-end bg-white hover:bg-black/5 transition rounded-medium w-[calc((100%/5)-16px)] h-64 p-4 border border-black/15 shadow-1 mb-3 mr-4 cursor-pointer">
+				<template
+					v-if="!isGetBoardsLoading"
+					v-for="(board, index) in boards"
+				>
+					<NuxtLink
+						:to="{name: 'app-editor-boardId', params: {boardId: board.id}}"
+						class="flex flex-col justify-end bg-white hover:bg-black/5 transition rounded-medium w-[calc((100%/5)-16px)] h-64 p-4 border border-black/15 shadow-1 mb-3 mr-4 cursor-pointer"
+					>
 						<h2 class="text-sm text-gray-600">{{ board.title }}</h2>
 						<p
 							v-if="board.updated_at"
 							class="text-gray-400"
-						>Last modified {{$dayjs(board.updated_at).fromNow()}}</p>
-					</div>
+						>Last modified {{ $dayjs(board.updated_at).fromNow() }}</p>
+					</NuxtLink>
 				</template>
 				<!-- End Board Items -->
 				
@@ -52,12 +58,11 @@
 <script setup lang="ts">
 import {faPlus} from '@fortawesome/free-solid-svg-icons'
 import {Vue3Lottie} from "vue3-lottie";
-import type {BoardModel} from "~/types/board";
 
 definePageMeta({
 	layout: 'board-layout',
 })
-
+// console.log("Routes", useRouter().getRoutes())
 const isBoardCreateModalVisible = ref(false)
 
 const loadingJsonURL = new URL('~/assets/lottie/loading.json', import.meta.url)?.href
