@@ -5,12 +5,19 @@
 		:class="isEditorBgDotsActive && 'has-dots-bg'"
 	>
 		
-		<div class="h-full overflow-auto mb-36">
-			<div class="flex h-[10000px] w-[10000px]">
+		<div
+			id="editor_draggable_area_container"
+			class="h-full overflow-auto mb-36 outline-none"
+		>
+			<div
+				id="editor_draggable_area"
+				class="flex h-[10000px] w-[10000px] cursor-pointer"
+			>
+				
 				<!-- Category -->
 				<div
 					v-for="color in ['cyan', 'green', 'orange', 'red', 'cyan']"
-					class="w-64 mr-4"
+					class="w-64 select-none mr-4"
 				>
 					
 					<!-- Category Title -->
@@ -61,6 +68,7 @@
 				
 				</div>
 				<!-- End Category -->
+			
 			</div>
 		</div>
 	
@@ -71,6 +79,10 @@
 const settingsStore = useSettingsStore()
 const settingsStoreRefs = storeToRefs(settingsStore)
 const isEditorBgDotsActive = settingsStoreRefs.isEditorBgDotsActive
+
+const {makeEditorDraggable} = useDraggable()
+
+onMounted(makeEditorDraggable)
 </script>
 
 <style scoped lang="scss">
