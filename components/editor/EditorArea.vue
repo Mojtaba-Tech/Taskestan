@@ -11,7 +11,7 @@
 		>
 			<div
 				id="editor_draggable_area"
-				class="flex h-[10000px] w-[10000px] cursor-pointer"
+				class="relative flex h-[10000px] w-[10000px] cursor-pointer"
 			>
 				
 				<!-- Category -->
@@ -21,6 +21,21 @@
 					<EditorCategory :color="color" />
 				</template>
 				<!-- End Category -->
+				
+				<!-- Notes -->
+				<EditorNote
+					text="Embrace what makes you different and let it be your superpower."
+					top="300px"
+					left="400px"
+					background="#EF80A8BF"
+				/>
+				<EditorNote
+					text="Embrace what makes you different and let it be your superpower Embrace what makes you different and let it be your superpower."
+					top="100px"
+					left="1000px"
+					background="#EFD080BF"
+				/>
+				<!-- End Notes -->
 			
 			</div>
 		</div>

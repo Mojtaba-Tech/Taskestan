@@ -1,5 +1,5 @@
 <template>
-	<section class="flex justify-between items-center pb-4">
+	<section class="flex justify-between items-center pb-4 select-none">
 		
 		<!-- Manage Board Pages -->
 		<section class="flex items-center">
