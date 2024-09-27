@@ -1,0 +1,1 @@
+export type HTMLElementRolesModel = 'editor-draggable-area' | 'category' | 'note'

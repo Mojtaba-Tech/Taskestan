@@ -7,19 +7,22 @@
 		
 		<div
 			id="editor_draggable_area_container"
+			ref="editor"
 			class="h-full overflow-auto mb-36 outline-none"
+			@mousedown="startEditorDrag"
 		>
 			<div
 				id="editor_draggable_area"
 				class="relative flex h-[10000px] w-[10000px] cursor-pointer"
+				data-element-role="editor-draggable-area"
 			>
 				
 				<!-- Category -->
-				<template
-					v-for="color in ['cyan', 'green', 'orange', 'red', 'cyan']"
-				>
-					<EditorCategory :color="color" />
-				</template>
+				<!--<template-->
+				<!--	v-for="color in ['cyan', 'green', 'orange', 'red', 'cyan']"-->
+				<!--&gt;-->
+				<!--	<EditorCategory :color="color" />-->
+				<!--</template>-->
 				<!-- End Category -->
 				
 				<!-- Notes -->
@@ -32,7 +35,7 @@
 				<EditorNote
 					text="Embrace what makes you different and let it be your superpower Embrace what makes you different and let it be your superpower."
 					top="100px"
-					left="1000px"
+					left="1500px"
 					background="#EFD080BF"
 				/>
 				<!-- End Notes -->
@@ -44,13 +47,53 @@
 </template>
 
 <script setup lang="ts">
+import {storeToRefs} from "pinia";
+import { ref, onBeforeUnmount } from 'vue';
+
+// settings store
 const settingsStore = useSettingsStore()
 const settingsStoreRefs = storeToRefs(settingsStore)
 const isEditorBgDotsActive = settingsStoreRefs.isEditorBgDotsActive
 
-const {makeEditorDraggable} = useDraggable()
+// drag and drop store
+let {isDraggingSomething} = storeToRefs(useDragAndDropStore())
 
-onMounted(makeEditorDraggable)
+
+// Editor scroll variables
+const editor = ref<HTMLElement | null>(null) as Ref<HTMLElement>;
+let editorStartScroll = { x: 0, y: 0 };
+let editorMouseStart = { x: 0, y: 0 };
+let isEditorDragging = false;
+
+// Handle dragging the editor for scrolling
+const startEditorDrag = (e) => {
+	if (!isDraggingSomething.value) {
+		isEditorDragging = true;
+		editorStartScroll = { x: editor.value.scrollLeft, y: editor.value.scrollTop };
+		editorMouseStart = { x: e.clientX, y: e.clientY };
+		document.addEventListener('mousemove', dragEditor);
+		document.addEventListener('mouseup', stopEditorDrag);
+	}
+};
+
+const dragEditor = (e) => {
+	if (isEditorDragging) {
+		editor.value.scrollLeft = editorStartScroll.x - (e.clientX - editorMouseStart.x);
+		editor.value.scrollTop = editorStartScroll.y - (e.clientY - editorMouseStart.y);
+	}
+};
+
+const stopEditorDrag = () => {
+	isEditorDragging = false;
+	document.removeEventListener('mousemove', dragEditor);
+	document.removeEventListener('mouseup', stopEditorDrag);
+};
+
+// Clean up event listeners when the component is destroyed
+onBeforeUnmount(() => {
+	document.removeEventListener('mousemove', dragEditor);
+	document.removeEventListener('mouseup', stopEditorDrag);
+});
 </script>
 
 <style scoped lang="scss">
