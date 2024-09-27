@@ -28,15 +28,21 @@
 				<!-- Notes -->
 				<EditorNote
 					text="Embrace what makes you different and let it be your superpower."
-					top="300px"
-					left="400px"
+					:x="300"
+					:y="150"
 					background="#EF80A8BF"
 				/>
 				<EditorNote
 					text="Embrace what makes you different and let it be your superpower Embrace what makes you different and let it be your superpower."
-					top="100px"
-					left="1500px"
+					:x="700"
+					:y="200"
 					background="#EFD080BF"
+				/>
+				<EditorNote
+					text="Embrace what makes you different and let it be what makes you different and let it be your superpower."
+					:x="1000"
+					:y="50"
+					background="#77D080BF"
 				/>
 				<!-- End Notes -->
 			
@@ -48,52 +54,19 @@
 
 <script setup lang="ts">
 import {storeToRefs} from "pinia";
-import { ref, onBeforeUnmount } from 'vue';
+import { ref } from 'vue';
+import useEditorDraggable from "~/composables/useEditorDraggable";
 
 // settings store
 const settingsStore = useSettingsStore()
 const settingsStoreRefs = storeToRefs(settingsStore)
 const isEditorBgDotsActive = settingsStoreRefs.isEditorBgDotsActive
 
-// drag and drop store
-let {isDraggingSomething} = storeToRefs(useDragAndDropStore())
-
-
-// Editor scroll variables
+// make editor draggable using useEditorDraggable composable
 const editor = ref<HTMLElement | null>(null) as Ref<HTMLElement>;
-let editorStartScroll = { x: 0, y: 0 };
-let editorMouseStart = { x: 0, y: 0 };
-let isEditorDragging = false;
+const {startEditorDrag} = useEditorDraggable(editor)
 
-// Handle dragging the editor for scrolling
-const startEditorDrag = (e) => {
-	if (!isDraggingSomething.value) {
-		isEditorDragging = true;
-		editorStartScroll = { x: editor.value.scrollLeft, y: editor.value.scrollTop };
-		editorMouseStart = { x: e.clientX, y: e.clientY };
-		document.addEventListener('mousemove', dragEditor);
-		document.addEventListener('mouseup', stopEditorDrag);
-	}
-};
 
-const dragEditor = (e) => {
-	if (isEditorDragging) {
-		editor.value.scrollLeft = editorStartScroll.x - (e.clientX - editorMouseStart.x);
-		editor.value.scrollTop = editorStartScroll.y - (e.clientY - editorMouseStart.y);
-	}
-};
-
-const stopEditorDrag = () => {
-	isEditorDragging = false;
-	document.removeEventListener('mousemove', dragEditor);
-	document.removeEventListener('mouseup', stopEditorDrag);
-};
-
-// Clean up event listeners when the component is destroyed
-onBeforeUnmount(() => {
-	document.removeEventListener('mousemove', dragEditor);
-	document.removeEventListener('mouseup', stopEditorDrag);
-});
 </script>
 
 <style scoped lang="scss">

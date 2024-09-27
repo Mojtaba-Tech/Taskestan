@@ -25,9 +25,9 @@
 import {ref, onBeforeUnmount} from 'vue';
 import {storeToRefs} from "pinia";
 
-defineProps<{
-	top: string,
-	left: string,
+const props = defineProps<{
+	y: number,
+	x: number,
 	background: string,
 	text: string
 }>()
@@ -35,7 +35,7 @@ defineProps<{
 
 let {isDraggingSomething} = storeToRefs(useDragAndDropStore())
 
-const position = ref({x: 100, y: 100}); // Initial position
+const position = ref({x: props.x, y: props.y}); // Initial position
 let offset = {x: 0, y: 0};
 let isDragging = false;
 let zIndex = ref(1);
