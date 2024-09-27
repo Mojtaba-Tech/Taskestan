@@ -136,7 +136,8 @@ export default {
       },
       boxShadow: {
         1: '0px 0px 2px 0px rgba(0, 0, 0, 0.06)',
-        2: '0px 0.5px 1px 0px rgba(0, 0, 0, 0.20)'
+        2: '0px 0.5px 1px 0px rgba(0, 0, 0, 0.20)',
+        3: '0px 1px 2px 0px rgba(0, 0, 0, 0.06)'
       },
       fontSize: {
         13: '13px'

@@ -13,9 +13,14 @@
 		</main>
 		<!-- End Page Content -->
 		
+		<!-- Fixed Action Bar -->
+		<EditorFixedActionBar />
+		<!-- End Fixed Action Bar -->
+		
 	</div>
 </template>
 
 <script setup lang="ts">
+
 
 </script>
