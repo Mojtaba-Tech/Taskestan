@@ -1,5 +1,10 @@
 <template>
-	<div class="w-64 select-none mr-4">
+	<div
+		class="absolute w-64 select-none mr-4"
+		:style="{ top: position.y + 'px', left: position.x + 'px', zIndex: zIndex }"
+		@mousedown="startDrag"
+		data-element-role="category"
+	>
 		
 		<!-- Category Title -->
 		<header class="inline-flex justify-between items-center mb-3">
@@ -37,9 +42,49 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
+import {storeToRefs} from "pinia";
+import {onBeforeUnmount, ref} from "vue";
+
+const props = defineProps<{
+	y: number,
+	x: number,
 	color: string
 }>()
+
+let {isDraggingSomething} = storeToRefs(useDragAndDropStore())
+
+const position = ref({x: props.x, y: props.y}); // Initial position
+let offset = {x: 0, y: 0};
+let zIndex = ref(1);
+
+const startDrag = (e: MouseEvent) => {
+	zIndex.value++;
+	isDraggingSomething.value = true;
+	offset = {
+		x: e.clientX - position.value.x,
+		y: e.clientY - position.value.y,
+	};
+	document.addEventListener('mousemove', drag);
+	document.addEventListener('mouseup', stopDrag);
+};
+
+const drag = (e: MouseEvent) => {
+	position.value = {
+		x: (e.clientX - offset.x) < 6 ? 6 : e.clientX - offset.x,
+		y: (e.clientY - offset.y) < 6 ? 6 : e.clientY - offset.y,
+	};
+};
+
+const stopDrag = () => {
+	isDraggingSomething.value = false;
+	document.removeEventListener('mousemove', drag);
+	document.removeEventListener('mouseup', stopDrag);
+};
+
+onBeforeUnmount(() => {
+	document.removeEventListener('mousemove', drag);
+	document.removeEventListener('mouseup', stopDrag);
+});
 </script>
 
 <style scoped>

@@ -32,15 +32,13 @@ const props = defineProps<{
 	text: string
 }>()
 
-
 let {isDraggingSomething} = storeToRefs(useDragAndDropStore())
 
 const position = ref({x: props.x, y: props.y}); // Initial position
 let offset = {x: 0, y: 0};
-let isDragging = false;
 let zIndex = ref(1);
 
-const startDrag = (e) => {
+const startDrag = (e: MouseEvent) => {
 	console.log("startDrag", e.target);
 	zIndex.value++;
 	isDraggingSomething.value = true;
@@ -52,7 +50,7 @@ const startDrag = (e) => {
 	document.addEventListener('mouseup', stopDrag);
 };
 
-const drag = (e) => {
+const drag = (e: MouseEvent) => {
 	position.value = {
 		x: (e.clientX - offset.x) < 0 ? 0 : e.clientX - offset.x,
 		y: (e.clientY - offset.y) < 0 ? 0 : e.clientY - offset.y,
@@ -69,28 +67,6 @@ onBeforeUnmount(() => {
 	document.removeEventListener('mousemove', drag);
 	document.removeEventListener('mouseup', stopDrag);
 });
-
-// let isMouseDown = false;
-// let offsetX = 0;
-// let offsetY = 0;
-//
-// function onMouseDown(event: MouseEvent) {
-// 	isMouseDown = true
-// 	offsetX = event.clientX - (event.currentTarget as HTMLElement).getBoundingClientRect().left;
-// 	offsetY = event.clientY - (event.currentTarget as HTMLElement).getBoundingClientRect().top;
-// }
-//
-// function onMouseUp(event: MouseEvent) {
-// 	isMouseDown = false
-// }
-//
-// function onMouseMove(event: MouseEvent) {
-// 	if(isMouseDown) {
-// 		const element = event.currentTarget as HTMLElement;
-// 		element.style.top = `${event.clientY - offsetY}px`;
-// 		element.style.left = `${event.clientX - offsetX}px`;
-// 	}
-// }
 </script>
 
 <style scoped>

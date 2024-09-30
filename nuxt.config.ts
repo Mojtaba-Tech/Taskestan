@@ -8,7 +8,8 @@ export default defineNuxtConfig({
     '@vesp/nuxt-fontawesome',
     "@nuxtjs/supabase",
     "@pinia/nuxt",
-    "dayjs-nuxt"
+    "dayjs-nuxt",
+    '@element-plus/nuxt'
   ],
   googleFonts: {
     families: {

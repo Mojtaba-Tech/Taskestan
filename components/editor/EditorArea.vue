@@ -9,6 +9,7 @@
 			id="editor_draggable_area_container"
 			ref="editor"
 			class="h-full overflow-auto mb-36 outline-none"
+			:style="{}"
 			@mousedown="startEditorDrag"
 		>
 			<div
@@ -18,32 +19,26 @@
 			>
 				
 				<!-- Category -->
-				<!--<template-->
-				<!--	v-for="color in ['cyan', 'green', 'orange', 'red', 'cyan']"-->
-				<!--&gt;-->
-				<!--	<EditorCategory :color="color" />-->
-				<!--</template>-->
+				<section class="relative z-10">
+					<EditorCategory
+						v-for="color in ['red', 'cyan']"
+						:color="color"
+						:x="100"
+						:y="50"
+					/>
+				</section>
 				<!-- End Category -->
 				
 				<!-- Notes -->
-				<EditorNote
-					text="Embrace what makes you different and let it be your superpower."
-					:x="300"
-					:y="150"
-					background="#EF80A8BF"
-				/>
-				<EditorNote
-					text="Embrace what makes you different and let it be your superpower Embrace what makes you different and let it be your superpower."
-					:x="700"
-					:y="200"
-					background="#EFD080BF"
-				/>
-				<EditorNote
-					text="Embrace what makes you different and let it be what makes you different and let it be your superpower."
-					:x="1000"
-					:y="50"
-					background="#77D080BF"
-				/>
+				<section>
+					<EditorNote
+						v-for="(note, index) in notes"
+						:text="note.text"
+						:x="note.x"
+						:y="note.y"
+						:background="note.color"
+					/>
+				</section>
 				<!-- End Notes -->
 			
 			</div>
@@ -67,6 +62,14 @@ const editor = ref<HTMLElement | null>(null) as Ref<HTMLElement>;
 const {startEditorDrag} = useEditorDraggable(editor)
 
 
+let {isDraggingSomething} = storeToRefs(useDragAndDropStore())
+
+// todo: it should be dynamic from database
+const notes = [
+	{id: 1, x: 300, y: 150, color: '#EF80A8BF', text: 'Embrace what makes you different and let it be your superpower.'},
+	{id: 2, x: 700, y: 200, color: '#EFD080BF', text: 'Embrace what makes you different and let it be your superpower Embrace what makes you different and let it be your superpower.'},
+	{id: 3, x: 1000, y: 50, color: '#77D080BF', text: 'Embrace what makes you different and let it be what makes you different and let it be your superpower.'},
+]
 </script>
 
 <style scoped lang="scss">
@@ -77,7 +80,6 @@ const {startEditorDrag} = useEditorDraggable(editor)
 	&:before {
 		content: "";
 		position: absolute;
-		//background-image: url("data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDQwIDQwIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiPgoJPHRpdGxlPk5ldyBQcm9qZWN0PC90aXRsZT4KCTxkZWZzPgoJCTxpbWFnZSAgd2lkdGg9IjQiIGhlaWdodD0iNCIgaWQ9ImltZzEiIGhyZWY9ImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBQVFBQUFBRUFRTUFBQUNUUHd3OUFBQUFBWE5TUjBJQjJja3Nmd0FBQUFOUVRGUkY2ZW5wVnlQRWpBQUFBQXhKUkVGVWVKeGpaR0FFUXdBQUhBQUZTSlpQdkFBQUFBQkpSVTVFcmtKZ2dnPT0iLz4KCTwvZGVmcz4KCTxzdHlsZT4KCTwvc3R5bGU+Cgk8dXNlIGlkPSJCYWNrZ3JvdW5kIiBocmVmPSIjaW1nMSIgeD0iMCIgeT0iMCIvPgo8L3N2Zz4=");
 		background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzYzMzZfNTIyOTIpIj4KPGcgb3BhY2l0eT0iMC43NSI+CjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjIiIGZpbGw9IiNFOEU5RUUiLz4KPHJlY3QgeD0iMTgiIHdpZHRoPSIyIiBoZWlnaHQ9IjIiIGZpbGw9IiNFOEU5RUUiLz4KPHJlY3QgeT0iMTgiIHdpZHRoPSIyIiBoZWlnaHQ9IjIiIGZpbGw9IiNFOEU5RUUiLz4KPHJlY3QgeD0iMTgiIHk9IjE4IiB3aWR0aD0iMiIgaGVpZ2h0PSIyIiBmaWxsPSIjRThFOUVFIi8+CjwvZz4KPC9nPgo8ZGVmcz4KPGNsaXBQYXRoIGlkPSJjbGlwMF82MzM2XzUyMjkyIj4KPHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBmaWxsPSJ3aGl0ZSIvPgo8L2NsaXBQYXRoPgo8L2RlZnM+Cjwvc3ZnPgo=");
 		background-repeat: repeat;
 		background-size: 16px;

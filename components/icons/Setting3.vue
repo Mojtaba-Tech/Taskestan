@@ -28,6 +28,28 @@ withDefaults(defineProps<IconModel>(), {
 	width: 16,
 	height: 16,
 	color: '#2386F8',
+	colorHover: '#9932d5',
 	strokeWidth: 1.5
 })
 </script>
+
+<style scoped>
+path,
+circle {
+	transition: all 0.3s;
+}
+
+.group\/svg:hover .group-hover\/svg\:hovered {
+	path {
+		&[stroke] {
+			stroke: v-bind(colorHover);
+		}
+	}
+	
+	circle {
+		&[stroke] {
+			stroke: v-bind(colorHover);
+		}
+	}
+}
+</style>
