@@ -1,17 +1,19 @@
 <template>
 	<section
 		class="absolute flex flex-col py-4 pl-6 pr-5 rounded-lg w-52 min-h-52 select-none pointer-events-auto"
-		:style="{ top: position.y + 'px', left: position.x + 'px', background, zIndex: zIndex }"
+		:style="{
+			top: position.y + 'px',
+			left: position.x + 'px',
+			background: bgColor,
+			color: textColor,
+			zIndex
+		}"
 		@mousedown="startDrag"
 		data-element-role="note"
 	>
 		<!--:style="{top, left, background}"-->
-		<p class="text-black/75 font-medium text-sm mb-8 pointer-events-none">
+		<p class="font-medium text-sm mb-8 pointer-events-none">
 			{{ text }}
-			
-			<span class="flex mt-3">x-> {{ position.x }}</span>
-			<span class="flex mt-3">y-> {{ position.y }}</span>
-			{{isDraggingSomething}}
 		</p>
 		<img
 			src="https://i.pravatar.cc/20"
@@ -28,7 +30,8 @@ import {storeToRefs} from "pinia";
 const props = defineProps<{
 	y: number,
 	x: number,
-	background: string,
+	bgColor: string,
+	textColor: string,
 	text: string
 }>()
 
@@ -39,7 +42,6 @@ let offset = {x: 0, y: 0};
 let zIndex = ref(1);
 
 const startDrag = (e: MouseEvent) => {
-	console.log("startDrag", e.target);
 	zIndex.value++;
 	isDraggingSomething.value = true;
 	offset = {

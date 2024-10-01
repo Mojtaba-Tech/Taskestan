@@ -1,0 +1,123 @@
+<template>
+	<div>
+		
+		<!-- Modal Overlay -->
+		<Transition name="overlay">
+			<section
+				v-if="isNoteCreateModalVisible"
+				@click="isNoteCreateModalVisible = false"
+				class="fixed z-50 w-full h-screen right-0 top-0 bg-gray-600/60"
+			></section>
+		</Transition>
+		<!-- End Modal Overlay -->
+		
+		<!-- Modal Content -->
+		<Transition name="modal-content">
+			<section
+				v-if="isNoteCreateModalVisible"
+				class="h-screen fixed z-50 right-0 w-1/2 top-0 bg-white"
+			>
+				<section class="overflow-y-auto h-full p-4">
+					<form ref="createNoteForm" @submit.prevent="submitForm">
+						<div class="mb-3">
+							<PublicTextarea
+								placeholder="Enter board text..."
+								:rows="7"
+								id="text"
+								labelText="Note Text"
+								v-model="form.text"
+							/>
+						</div>
+						<div class="flex mb-3">
+							<div class="w-1/2">
+								<PublicColorPicker
+									label-text="Background Color"
+									v-model="form.backgroundColor"
+								/>
+							</div>
+							<div class="w-1/2">
+								<PublicColorPicker
+									label-text="Text Color"
+									v-model="form.textColor"
+								/>
+							</div>
+						</div>
+						<PublicButton
+							type="submit"
+							:clicked="submitForm"
+							buttonText="Add Note"
+						/>
+					</form>
+				</section>
+			</section>
+		</Transition>
+		<!-- End Modal Content -->
+	
+	</div>
+</template>
+
+<script lang="ts" setup>
+const route = useRoute()
+
+const isNoteCreateModalVisible: Ref<boolean> = defineModel('isNoteCreateModalVisible', {required: true})
+
+let form = ref({
+	text: '',
+	backgroundColor: '',
+	textColor: ''
+})
+
+const noteStore = useNoteStore()
+
+async function submitForm() {
+	if (form.value.text) {
+		await noteStore.createNote({
+			text: form.value.text,
+			settings: {
+				position: {
+					x: Math.ceil(Math.random() * 200),
+					y: Math.ceil(Math.random() * 200)
+				},
+				color: {
+					bg: form.value.backgroundColor,
+					text: form.value.textColor
+				}
+			},
+			board_id: parseInt(route.params.boardId as string)
+		})
+		
+		form.value = {
+			text: '',
+			backgroundColor: '',
+			textColor: ''
+		}
+
+		isNoteCreateModalVisible.value = false;
+	} else {
+		alert("Note Text is required")
+	}
+}
+</script>
+
+<style lang="scss">
+.overlay-enter-active,
+.overlay-leave-active {
+	transition: opacity 0.5s ease;
+}
+
+.overlay-enter-from,
+.overlay-leave-to {
+	opacity: 0;
+}
+
+.modal-content-enter-active,
+.modal-content-leave-active {
+	transition: right 0.5s ease-in-out;
+}
+
+.modal-content-enter-from,
+.modal-content-leave-to {
+	right: -50% !important;
+}
+</style>
+

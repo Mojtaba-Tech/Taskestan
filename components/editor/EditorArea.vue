@@ -7,7 +7,7 @@
 		
 		<div
 			id="editor_draggable_area_container"
-			ref="editor"
+			ref="editorArea"
 			class="h-full overflow-auto mb-36 outline-none"
 			:style="{}"
 			@mousedown="startEditorDrag"
@@ -19,27 +19,19 @@
 			>
 				
 				<!-- Category -->
-				<section class="relative z-10">
-					<EditorCategory
-						v-for="color in ['red', 'cyan']"
-						:color="color"
-						:x="100"
-						:y="50"
-					/>
-				</section>
+				<!--<section class="relative z-10">-->
+				<!--	<EditorCategory-->
+				<!--		v-for="color in ['red', 'cyan']"-->
+				<!--		:color="color"-->
+				<!--		:x="100"-->
+				<!--		:y="50"-->
+				<!--	/>-->
+				<!--</section>-->
 				<!-- End Category -->
 				
-				<!-- Notes -->
-				<section>
-					<EditorNote
-						v-for="(note, index) in notes"
-						:text="note.text"
-						:x="note.x"
-						:y="note.y"
-						:background="note.color"
-					/>
-				</section>
-				<!-- End Notes -->
+				<!-- Editor Note List Container -->
+				<EditorNoteListContainer />
+				<!-- End Editor Note List Container -->
 			
 			</div>
 		</div>
@@ -48,28 +40,16 @@
 </template>
 
 <script setup lang="ts">
-import {storeToRefs} from "pinia";
-import { ref } from 'vue';
-import useEditorDraggable from "~/composables/useEditorDraggable";
-
 // settings store
 const settingsStore = useSettingsStore()
 const settingsStoreRefs = storeToRefs(settingsStore)
 const isEditorBgDotsActive = settingsStoreRefs.isEditorBgDotsActive
 
 // make editor draggable using useEditorDraggable composable
-const editor = ref<HTMLElement | null>(null) as Ref<HTMLElement>;
-const {startEditorDrag} = useEditorDraggable(editor)
+const editorArea = ref<HTMLElement | null>(null) as Ref<HTMLElement>;
+const {startEditorDrag} = useEditorDraggable(editorArea)
 
 
-let {isDraggingSomething} = storeToRefs(useDragAndDropStore())
-
-// todo: it should be dynamic from database
-const notes = [
-	{id: 1, x: 300, y: 150, color: '#EF80A8BF', text: 'Embrace what makes you different and let it be your superpower.'},
-	{id: 2, x: 700, y: 200, color: '#EFD080BF', text: 'Embrace what makes you different and let it be your superpower Embrace what makes you different and let it be your superpower.'},
-	{id: 3, x: 1000, y: 50, color: '#77D080BF', text: 'Embrace what makes you different and let it be what makes you different and let it be your superpower.'},
-]
 </script>
 
 <style scoped lang="scss">

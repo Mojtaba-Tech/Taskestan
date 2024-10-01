@@ -2,7 +2,7 @@
 	<label
 		v-if="hasLabel"
 		:for="id"
-		class="text-gray-600 font-semibold"
+		class="inline-flex text-gray-600 font-semibold mb-1"
 	>{{ labelText }}</label>
 	<textarea
 		v-model="model"
@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import type {PublicTextareaModel} from "~/types/form"
 
-const model = defineModel();
+const model: Ref<string> = defineModel({required: true});
 
 const props = withDefaults(defineProps<PublicTextareaModel>(), {
 	placeholder: 'Enter your text...',

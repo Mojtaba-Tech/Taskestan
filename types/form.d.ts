@@ -26,6 +26,13 @@ export interface PublicButtonModel {
     clicked: () => void
 }
 
+export interface PublicColorPickerModel {
+    hasLabel?: boolean,
+    labelText?: string,
+    customClassList?: string[],
+    id?: string,
+}
+
 export type InputTypesModel =
     | 'button'
     | 'checkbox'
