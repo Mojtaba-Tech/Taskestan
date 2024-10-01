@@ -1,4 +1,4 @@
-import {serverSupabaseClient, serverSupabaseUser} from "#supabase/server";
+import {serverSupabaseClient} from "#supabase/server";
 import type {Database, TablesInsert} from "~/types/database.types";
 
 export default defineEventHandler(async (event) => {
@@ -9,9 +9,9 @@ export default defineEventHandler(async (event) => {
     if(user) {
         const requestBody: TablesInsert<'boards'> = {
             owner_id: user.id,
-            title: title,
-            brief: brief,
-            description: description
+            title,
+            brief,
+            description
         }
 
         const {data, error} = await client.from('boards').upsert(requestBody).select();
