@@ -18,5 +18,24 @@
       border-radius: 8px;
     }
   }
+
+  &.custom-popper-2 {
+    border-radius: 8px;
+
+    .el-dropdown-menu {
+      border-radius: 8px;
+    }
+  }
 }
 /* End Popper */
+
+/* Dropdown */
+.el-dropdown {
+  &.custom-dropdown-2 {
+    &.is-disabled {
+      @apply opacity-50 pointer-events-none #{!important};
+    }
+  }
+}
+/* End Drop Down */
+

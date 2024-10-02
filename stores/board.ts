@@ -5,7 +5,8 @@ export const useBoardStore = defineStore('boards', () => {
   const boards = ref<BoardModel[]>([])
   const isGetBoardsLoading = ref(false)
   const isCreateBoardLoading = ref(false)
-  const selectedBoardId = ref<number>(0)
+  const isChangeBoardLoading = ref(false)
+  const editorSelectedBoard = ref<BoardModel | null>(null)
 
   const getBoards = () => {
     isGetBoardsLoading.value = true;
@@ -43,7 +44,8 @@ export const useBoardStore = defineStore('boards', () => {
     boards,
     getBoards,
     createBoard,
-    selectedBoardId,
-    isGetBoardsLoading
+    editorSelectedBoard,
+    isGetBoardsLoading,
+    isChangeBoardLoading
   }
 })
