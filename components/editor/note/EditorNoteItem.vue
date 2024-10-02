@@ -4,16 +4,15 @@
 		:style="{
 			top: position.y + 'px',
 			left: position.x + 'px',
-			background: bgColor,
-			color: textColor,
+			background: note.settings.color?.bg || '#999999',
+			color: note.settings.color?.text || '#ffffff',
 			zIndex
 		}"
 		@mousedown="startDrag"
 		data-element-role="note"
 	>
-		<!--:style="{top, left, background}"-->
 		<p class="font-medium text-sm mb-8 pointer-events-none">
-			{{ text }}
+			{{ note.text }}
 		</p>
 		<img
 			src="https://i.pravatar.cc/20"
@@ -26,18 +25,21 @@
 <script setup lang="ts">
 import {ref, onBeforeUnmount} from 'vue';
 import {storeToRefs} from "pinia";
+import type {NoteModel, NoteSettingsModel} from "~/types/note";
 
 const props = defineProps<{
-	y: number,
-	x: number,
-	bgColor: string,
-	textColor: string,
-	text: string
+	note: NoteModel,
+	updateNotePosition: ({noteId, settings}: {noteId: number, settings: NoteSettingsModel}) => void
 }>()
 
 let {isDraggingSomething} = storeToRefs(useDragAndDropStore())
 
-const position = ref({x: props.x, y: props.y}); // Initial position
+// Initial position
+const position = ref({
+	x: props.note.settings.position.x,
+	y: props.note.settings.position.y
+});
+
 let offset = {x: 0, y: 0};
 let zIndex = ref(1);
 
@@ -63,6 +65,10 @@ const stopDrag = () => {
 	isDraggingSomething.value = false;
 	document.removeEventListener('mousemove', drag);
 	document.removeEventListener('mouseup', stopDrag);
+	
+	const settings = {...props.note.settings}
+	settings.position = {x: position.value.x, y: position.value.y}
+	props.updateNotePosition({noteId: props.note.id, settings})
 };
 
 onBeforeUnmount(() => {

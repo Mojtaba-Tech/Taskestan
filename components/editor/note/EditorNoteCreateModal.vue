@@ -21,24 +21,24 @@
 					<form ref="createNoteForm" @submit.prevent="submitForm">
 						<div class="mb-3">
 							<PublicTextarea
+								v-model="form.text"
 								placeholder="Enter board text..."
 								:rows="7"
 								id="text"
 								labelText="Note Text"
-								v-model="form.text"
 							/>
 						</div>
 						<div class="flex mb-3">
 							<div class="w-1/2">
 								<PublicColorPicker
-									label-text="Background Color"
 									v-model="form.backgroundColor"
+									label-text="Background Color"
 								/>
 							</div>
 							<div class="w-1/2">
 								<PublicColorPicker
-									label-text="Text Color"
 									v-model="form.textColor"
+									label-text="Text Color"
 								/>
 							</div>
 						</div>
