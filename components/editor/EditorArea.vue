@@ -29,9 +29,7 @@
 				<!--</section>-->
 				<!-- End Category -->
 				
-				<!-- Editor Note List Container -->
 				<EditorNoteListContainer />
-				<!-- End Editor Note List Container -->
 			
 			</div>
 		</div>
@@ -48,7 +46,6 @@ const isEditorBgDotsActive = settingsStoreRefs.isEditorBgDotsActive
 // make editor draggable using useEditorDraggable composable
 const editorArea = ref<HTMLElement | null>(null) as Ref<HTMLElement>;
 const {startEditorDrag} = useEditorDraggable(editorArea)
-
 
 </script>
 

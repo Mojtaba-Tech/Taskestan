@@ -1,13 +1,14 @@
 <template>
 	<section>
-		<TransitionGroup name="scale-up">
+		<!--<TransitionGroup name="scale-up">-->
 			<EditorNoteItem
-				v-if="!isGetNotesLoading || !isCreateNoteLoading"
+				v-if="(!isGetNotesLoading || !isCreateNoteLoading)"
 				v-for="(note, index) in notes"
+				:index="index"
 				:note="note"
 				:updateNotePosition="noteStore.updateNotePosition"
 			/>
-		</TransitionGroup>
+		<!--</TransitionGroup>-->
 	</section>
 </template>
 
@@ -20,8 +21,16 @@ const notes = noteStoreRefs.notes;
 const isGetNotesLoading = noteStoreRefs.isGetNotesLoading
 const isCreateNoteLoading = noteStoreRefs.isCreateNoteLoading
 
-const loadNotes = () => {
-	noteStore.getNotes(route.params.boardId as string)
+const boardStore = useBoardStore()
+const boardStoreRefs = storeToRefs(boardStore)
+const isChangeBoardLoading = boardStoreRefs.isChangeBoardLoading
+
+const loadNotes = async () => {
+	notes.value = []
+	
+	await noteStore.getNotes(route.params.boardId as string)
+	
+	isChangeBoardLoading.value = false;
 }
 
 onBeforeMount(loadNotes)

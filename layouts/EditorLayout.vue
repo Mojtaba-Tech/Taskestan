@@ -14,13 +14,41 @@
 		<!-- End Page Content -->
 		
 		<!-- Fixed Action Bar -->
-		<EditorFixedActionBar />
+		<EditorFixedActionBar/>
 		<!-- End Fixed Action Bar -->
-		
+	
 	</div>
 </template>
 
 <script setup lang="ts">
+import type {BoardModel} from "~/types/board";
 
+const route = useRoute()
 
+const boardStore = useBoardStore()
+const boardStoreRefs = storeToRefs(boardStore)
+const boards = boardStoreRefs.boards;
+const editorSelectedBoard = boardStoreRefs.editorSelectedBoard;
+
+// load boards and set selected board in editor
+const loadBoards = async () => {
+	await boardStore.getBoards()
+	
+	setEditorSelectedBoard(parseInt(route.params.boardId as string))
+}
+
+onMounted(() => {
+	loadBoards()
+})
+
+const setEditorSelectedBoard = (boardId: number) => {
+	editorSelectedBoard.value = boards.value.find((board) => board.id === boardId) as BoardModel
+}
+
+watch(
+	() => route.params.boardId,
+	(newBoardId, oldBoardId) => {
+		setEditorSelectedBoard(parseInt(newBoardId as string))
+	}
+)
 </script>
