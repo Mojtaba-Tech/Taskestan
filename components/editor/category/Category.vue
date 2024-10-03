@@ -7,15 +7,11 @@
 	>
 		
 		<!-- Category Title -->
-		<header class="inline-flex justify-between items-center mb-3">
+		<header class="inline-flex justify-between items-center w-full mb-3">
 			<div class="flex justify-between items-center mr-20">
 				<div class="mr-3.5">
 					<IconsArrowDown color="#58585C"/>
 				</div>
-				<PublicTag
-					:theme="color as 'cyan' | 'orange' | 'red' | 'green'"
-					:custom-class-list="['mr-2']"
-				/>
 				<h2 class="text-13 text-gray-700 whitespace-nowrap">
 					Getting Start
 				</h2>

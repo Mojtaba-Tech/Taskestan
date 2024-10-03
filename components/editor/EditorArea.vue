@@ -18,17 +18,7 @@
 				data-element-role="editor-draggable-area"
 			>
 				
-				<!-- Category -->
-				<!--<section class="relative z-10">-->
-				<!--	<EditorCategory-->
-				<!--		v-for="color in ['red', 'cyan']"-->
-				<!--		:color="color"-->
-				<!--		:x="100"-->
-				<!--		:y="50"-->
-				<!--	/>-->
-				<!--</section>-->
-				<!-- End Category -->
-				
+				<EditorCategoryListContainer />
 				<EditorNoteListContainer />
 			
 			</div>

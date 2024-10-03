@@ -69,11 +69,9 @@ const boardStore = useBoardStore()
 const boardStoreRefs = storeToRefs(boardStore)
 const boards = boardStoreRefs.boards
 const editorSelectedBoard = boardStoreRefs.editorSelectedBoard
-const isChangeBoardLoading = boardStoreRefs.isChangeBoardLoading
 
 const changeBoard = (board: BoardModel) => {
 	if(parseInt(route.params.boardId as string) !== board.id) {
-		isChangeBoardLoading.value = true;
 		boardListDropdown.value?.handleClose()
 		
 		router.push(`/app/editor/${board.id}`)

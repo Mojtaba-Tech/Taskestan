@@ -9,7 +9,10 @@
 						class="cursor-pointer"
 					/>
 				</li>
-				<li class="mr-5">
+				<li
+					@click="isCategoryCreateModalVisible = true;"
+					class="mr-5"
+				>
 					<IconsPallete2
 						class="cursor-pointer"
 					/>
@@ -28,6 +31,7 @@
 		
 		<!-- Modals -->
 		<EditorNoteCreateModal v-model:is-note-create-modal-visible="isNoteCreateModalVisible" />
+		<EditorCategoryCreateModal v-model:is-category-create-modal-visible="isCategoryCreateModalVisible" />
 		<!-- End Modals -->
 		
 	</div>
@@ -35,6 +39,7 @@
 
 <script setup lang="ts">
 const isNoteCreateModalVisible = ref(false)
+const isCategoryCreateModalVisible = ref(false)
 </script>
 
 <style scoped>

@@ -18,6 +18,7 @@
 				class="h-screen fixed z-50 right-0 w-1/2 top-0 bg-white"
 			>
 				<section class="overflow-y-auto h-full p-4">
+					<h3 class="mb-3">Create a Note</h3>
 					<form ref="createNoteForm" @submit.prevent="submitForm">
 						<div class="mb-3">
 							<PublicTextarea
