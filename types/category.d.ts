@@ -7,5 +7,8 @@ export interface CategoryModel {
 }
 
 export interface CategorySettingsModel {
-
+  position: {
+    x: number,
+    y: number
+  }
 }

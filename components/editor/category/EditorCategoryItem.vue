@@ -12,8 +12,8 @@
 				<div class="mr-3.5">
 					<IconsArrowDown color="#58585C"/>
 				</div>
-				<h2 class="text-13 text-gray-700 whitespace-nowrap">
-					Getting Start
+				<h2 class="text-13 text-gray-700 whitespace-nowrap leading-3">
+					{{category.title}}
 				</h2>
 			</div>
 			<div class="cursor-pointer mr-1">
@@ -26,7 +26,7 @@
 		<section>
 			
 			<!-- Task Item -->
-			<template	v-for="i in 3">
+			<template	v-for="i in 2">
 				<EditorTask :color="color" />
 			</template>
 			<!-- End Task Item -->
@@ -40,16 +40,21 @@
 <script setup lang="ts">
 import {storeToRefs} from "pinia";
 import {onBeforeUnmount, ref} from "vue";
+import type {CategoryModel, CategorySettingsModel} from "~/types/category";
 
 const props = defineProps<{
-	y: number,
-	x: number,
-	color: string
+	category: CategoryModel,
+	updateCategoryPosition: ({categoryId, settings}: {categoryId: number, settings: CategorySettingsModel}) => void
 }>()
 
 let {isDraggingSomething} = storeToRefs(useDragAndDropStore())
 
-const position = ref({x: props.x, y: props.y}); // Initial position
+// Initial position
+const position = ref({
+	x: props.category.settings.position.x,
+	y: props.category.settings.position.y
+});
+
 let offset = {x: 0, y: 0};
 let zIndex = ref(1);
 

@@ -1,11 +1,14 @@
 <template>
 	<section>
-		<EditorCategory
-			v-for="color in ['cyan']"
-			:color="color"
-			:x="100"
-			:y="50"
+		<!--<TransitionGroup name="scale-up">-->
+		<EditorCategoryItem
+			v-if="(!isGetCategoriesLoading || !isCreateCategoryLoading)"
+			v-for="(category, index) in categories"
+			:index="index"
+			:category="category"
 		/>
+		<!--:updateCategoryPosition="categoryStore.updateCategoryPosition"-->
+		<!--</TransitionGroup>-->
 	</section>
 </template>
 

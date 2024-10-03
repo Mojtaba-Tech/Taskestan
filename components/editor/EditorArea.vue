@@ -9,7 +9,6 @@
 			id="editor_draggable_area_container"
 			ref="editorArea"
 			class="h-full overflow-auto mb-36 outline-none"
-			:style="{}"
 			@mousedown="startEditorDrag"
 		>
 			<div
@@ -34,7 +33,9 @@ const settingsStoreRefs = storeToRefs(settingsStore)
 const isEditorBgDotsActive = settingsStoreRefs.isEditorBgDotsActive
 
 // make editor draggable using useEditorDraggable composable
-const editorArea = ref<HTMLElement | null>(null) as Ref<HTMLElement>;
+const editorStore = useEditorStore()
+const editorStoreRefs = storeToRefs(editorStore)
+const editorArea = editorStoreRefs.editorArea as Ref<HTMLElement>;
 const {startEditorDrag} = useEditorDraggable(editorArea)
 
 </script>

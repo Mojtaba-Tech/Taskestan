@@ -55,11 +55,22 @@ let form = ref({
 
 const categoryStore = useCategoryStore()
 
+// editor store
+const editorStore = useEditorStore()
+const editorStoreRefs = storeToRefs(editorStore)
+const editorArea = editorStoreRefs.editorArea as Ref<HTMLElement>;
+
 async function submitForm() {
 	if (form.value.title) {
 		await categoryStore.createCategory({
+			board_id: parseInt(route.params.boardId as string),
 			title: form.value.title,
-			board_id: parseInt(route.params.boardId as string)
+			settings: {
+				position: {
+					x: Math.ceil(Math.random() * 200 + editorArea.value.scrollLeft),
+					y: Math.ceil(Math.random() * 200 + editorArea.value.scrollTop)
+				}
+			},
 		})
 		
 		form.value = {

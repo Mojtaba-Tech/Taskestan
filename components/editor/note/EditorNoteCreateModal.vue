@@ -68,23 +68,29 @@ let form = ref({
 	textColor: ''
 })
 
+// note store
 const noteStore = useNoteStore()
+
+// editor store
+const editorStore = useEditorStore()
+const editorStoreRefs = storeToRefs(editorStore)
+const editorArea = editorStoreRefs.editorArea as Ref<HTMLElement>;
 
 async function submitForm() {
 	if (form.value.text) {
 		await noteStore.createNote({
+			board_id: parseInt(route.params.boardId as string),
 			text: form.value.text,
 			settings: {
 				position: {
-					x: Math.ceil(Math.random() * 200),
-					y: Math.ceil(Math.random() * 200)
+					x: Math.ceil(Math.random() * 200 + editorArea.value.scrollLeft),
+					y: Math.ceil(Math.random() * 200 + editorArea.value.scrollTop)
 				},
 				color: {
 					bg: form.value.backgroundColor,
 					text: form.value.textColor
 				}
 			},
-			board_id: parseInt(route.params.boardId as string)
 		})
 		
 		form.value = {
