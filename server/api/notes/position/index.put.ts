@@ -10,6 +10,9 @@ export default defineEventHandler(async (event) => {
     const {data, error} = await client.from('notes').update({settings})
       .eq('id', noteId)
       .select()
+
     return {data, error}
   }
+
+  return {error: 'You are not authorized to do that.'}
 })

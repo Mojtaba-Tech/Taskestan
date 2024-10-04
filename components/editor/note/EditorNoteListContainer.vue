@@ -21,16 +21,10 @@ const notes = noteStoreRefs.notes;
 const isGetNotesLoading = noteStoreRefs.isGetNotesLoading
 const isCreateNoteLoading = noteStoreRefs.isCreateNoteLoading
 
-const boardStore = useBoardStore()
-const boardStoreRefs = storeToRefs(boardStore)
-const isChangeBoardLoading = boardStoreRefs.isChangeBoardLoading
-
 const loadNotes = async () => {
 	notes.value = []
 	
 	await noteStore.getNotes(route.params.boardId as string)
-	
-	isChangeBoardLoading.value = false;
 }
 
 onBeforeMount(loadNotes)

@@ -1,5 +1,5 @@
 export interface PublicInputModel {
-    type: InputTypes,
+    type: InputTypesModel,
     theme: 'primary',
     customClassList: string[],
     id: string,

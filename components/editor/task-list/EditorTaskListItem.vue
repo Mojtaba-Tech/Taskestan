@@ -3,35 +3,31 @@
 		class="absolute w-64 select-none mr-4"
 		:style="{ top: position.y + 'px', left: position.x + 'px', zIndex: zIndex }"
 		@mousedown="startDrag"
-		data-element-role="category"
+		data-element-role="taskList"
 	>
 		
-		<!-- Category Title -->
-		<header class="inline-flex justify-between items-center mb-3">
+		<!-- Task List Title -->
+		<header class="inline-flex justify-between items-center w-full mb-3">
 			<div class="flex justify-between items-center mr-20">
 				<div class="mr-3.5">
 					<IconsArrowDown color="#58585C"/>
 				</div>
-				<PublicTag
-					:theme="color as 'cyan' | 'orange' | 'red' | 'green'"
-					:custom-class-list="['mr-2']"
-				/>
-				<h2 class="text-13 text-gray-700 whitespace-nowrap">
-					Getting Start
+				<h2 class="text-13 text-gray-700 whitespace-nowrap leading-3">
+					{{taskList.title}}
 				</h2>
 			</div>
 			<div class="cursor-pointer mr-1">
 				<IconsPlus color="#848589"/>
 			</div>
 		</header>
-		<!-- End Category Title -->
+		<!-- End Task List Title -->
 		
 		<!-- Tasks List -->
 		<section>
 			
 			<!-- Task Item -->
-			<template	v-for="i in 3">
-				<EditorTask :color="color" />
+			<template	v-for="i in 2">
+				<EditorTask :color="'purple'" />
 			</template>
 			<!-- End Task Item -->
 		
@@ -44,16 +40,21 @@
 <script setup lang="ts">
 import {storeToRefs} from "pinia";
 import {onBeforeUnmount, ref} from "vue";
+import type {TaskListModel, TaskListSettingsModel} from "~/types/task-list";
 
 const props = defineProps<{
-	y: number,
-	x: number,
-	color: string
+	taskList: TaskListModel,
+	updateTaskListPosition: ({taskListId, settings}: {taskListId: number, settings: TaskListSettingsModel}) => void
 }>()
 
 let {isDraggingSomething} = storeToRefs(useDragAndDropStore())
 
-const position = ref({x: props.x, y: props.y}); // Initial position
+// Initial position
+const position = ref({
+	x: props.taskList.settings.position.x,
+	y: props.taskList.settings.position.y
+});
+
 let offset = {x: 0, y: 0};
 let zIndex = ref(1);
 
@@ -79,7 +80,15 @@ const stopDrag = () => {
 	isDraggingSomething.value = false;
 	document.removeEventListener('mousemove', drag);
 	document.removeEventListener('mouseup', stopDrag);
+	
+	updateTaskListPosition()
 };
+
+const updateTaskListPosition = () => {
+	const settings = {...props.taskList.settings}
+	settings.position = {x: position.value.x, y: position.value.y}
+	props.updateTaskListPosition({taskListId: props.taskList.id, settings})
+}
 
 onBeforeUnmount(() => {
 	document.removeEventListener('mousemove', drag);
