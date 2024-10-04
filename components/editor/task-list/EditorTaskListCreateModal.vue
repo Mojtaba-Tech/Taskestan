@@ -4,8 +4,8 @@
 		<!-- Modal Overlay -->
 		<Transition name="overlay">
 			<section
-				v-if="isCategoryCreateModalVisible"
-				@click="isCategoryCreateModalVisible = false"
+				v-if="isTaskListCreateModalVisible"
+				@click="isTaskListCreateModalVisible = false"
 				class="fixed z-50 w-full h-screen right-0 top-0 bg-gray-600/60"
 			></section>
 		</Transition>
@@ -14,26 +14,26 @@
 		<!-- Modal Content -->
 		<Transition name="modal-content">
 			<section
-				v-if="isCategoryCreateModalVisible"
+				v-if="isTaskListCreateModalVisible"
 				class="h-screen fixed z-50 right-0 w-1/2 top-0 bg-white"
 			>
 				<section class="overflow-y-auto h-full p-4">
-					<h3 class="mb-3">Create a Category</h3>
-					<form ref="createCategoryForm" @submit.prevent="submitForm">
+					<h3 class="mb-3">Create a Task List</h3>
+					<form ref="createTaskListForm" @submit.prevent="submitForm">
 						<div class="mb-3">
 							<PublicInput
 								v-model="form.title"
 								type="text"
-								placeholder="Enter category title..."
+								placeholder="Enter task list title..."
 								:rows="7"
 								id="text"
-								labelText="Category Title"
+								labelText="Task List Title"
 							/>
 						</div>
 						<PublicButton
 							type="submit"
 							:clicked="submitForm"
-							buttonText="Add Category"
+							buttonText="Add Task List"
 						/>
 					</form>
 				</section>
@@ -47,13 +47,13 @@
 <script lang="ts" setup>
 const route = useRoute()
 
-const isCategoryCreateModalVisible: Ref<boolean> = defineModel('isCategoryCreateModalVisible', {required: true})
+const isTaskListCreateModalVisible: Ref<boolean> = defineModel('isTaskListCreateModalVisible', {required: true})
 
 let form = ref({
 	title: ''
 })
 
-const categoryStore = useCategoryStore()
+const taskListStore = useTaskListStore()
 
 // editor store
 const editorStore = useEditorStore()
@@ -62,7 +62,7 @@ const editorArea = editorStoreRefs.editorArea as Ref<HTMLElement>;
 
 async function submitForm() {
 	if (form.value.title) {
-		await categoryStore.createCategory({
+		await taskListStore.createTaskList({
 			board_id: parseInt(route.params.boardId as string),
 			title: form.value.title,
 			settings: {
@@ -77,9 +77,9 @@ async function submitForm() {
 			title: ''
 		}
 
-		isCategoryCreateModalVisible.value = false;
+		isTaskListCreateModalVisible.value = false;
 	} else {
-		alert("Category Title is required")
+		alert("Task List Title is required")
 	}
 }
 </script>

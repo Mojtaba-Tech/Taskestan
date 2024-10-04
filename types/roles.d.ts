@@ -1,1 +1,1 @@
-export type HTMLElementRolesModel = 'editor-draggable-area' | 'category' | 'note'
+export type HTMLElementRolesModel = 'editor-draggable-area' | 'task-list' | 'note'

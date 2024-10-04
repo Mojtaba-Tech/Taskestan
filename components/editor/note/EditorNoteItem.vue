@@ -66,10 +66,14 @@ const stopDrag = () => {
 	document.removeEventListener('mousemove', drag);
 	document.removeEventListener('mouseup', stopDrag);
 	
+	updateNotePosition()
+};
+
+const updateNotePosition = () => {
 	const settings = {...props.note.settings}
 	settings.position = {x: position.value.x, y: position.value.y}
 	props.updateNotePosition({noteId: props.note.id, settings})
-};
+}
 
 onBeforeUnmount(() => {
 	document.removeEventListener('mousemove', drag);

@@ -5,6 +5,4 @@
 
 <script setup lang="ts">
 onBeforeMount(() => navigateTo({name: 'app-boards-list'}))
-
-
 </script>

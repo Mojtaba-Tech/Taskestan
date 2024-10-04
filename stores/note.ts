@@ -40,7 +40,7 @@ export const useNoteStore = defineStore('notes', () => {
   const updateNotePosition = (requestBody: {noteId: number, settings: NoteSettingsModel}) => {
     isUpdateNotePositionLoading.value = true
 
-    $fetch('/api/notes', {method: 'PUT', body: requestBody})
+    $fetch('/api/notes/position', {method: 'PUT', body: requestBody})
       .then((response) => {})
       .catch((error) => console.log(error))
       .finally(() => {

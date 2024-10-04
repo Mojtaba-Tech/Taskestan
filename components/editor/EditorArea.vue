@@ -17,7 +17,7 @@
 				data-element-role="editor-draggable-area"
 			>
 				
-				<EditorCategoryListContainer />
+				<EditorTaskListContainer />
 				<EditorNoteListContainer />
 			
 			</div>
@@ -36,6 +36,7 @@ const isEditorBgDotsActive = settingsStoreRefs.isEditorBgDotsActive
 const editorStore = useEditorStore()
 const editorStoreRefs = storeToRefs(editorStore)
 const editorArea = editorStoreRefs.editorArea as Ref<HTMLElement>;
+
 const {startEditorDrag} = useEditorDraggable(editorArea)
 
 </script>

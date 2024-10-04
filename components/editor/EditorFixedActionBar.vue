@@ -10,7 +10,7 @@
 					/>
 				</li>
 				<li
-					@click="isCategoryCreateModalVisible = true;"
+					@click="isTaskListCreateModalVisible = true;"
 					class="mr-5"
 				>
 					<IconsPallete2
@@ -31,7 +31,7 @@
 		
 		<!-- Modals -->
 		<EditorNoteCreateModal v-model:is-note-create-modal-visible="isNoteCreateModalVisible" />
-		<EditorCategoryCreateModal v-model:is-category-create-modal-visible="isCategoryCreateModalVisible" />
+		<EditorTaskListCreateModal v-model:is-task-list-create-modal-visible="isTaskListCreateModalVisible" />
 		<!-- End Modals -->
 		
 	</div>
@@ -39,7 +39,7 @@
 
 <script setup lang="ts">
 const isNoteCreateModalVisible = ref(false)
-const isCategoryCreateModalVisible = ref(false)
+const isTaskListCreateModalVisible = ref(false)
 </script>
 
 <style scoped>

@@ -7,13 +7,13 @@ export default defineEventHandler(async (event) => {
   const {data: {user}} = await client.auth.getUser()
 
   if(user) {
-    const requestBody: TablesInsert<'categories'> = {
+    const requestBody: TablesInsert<'taskLists'> = {
       board_id,
       title,
       settings
     }
 
-    const {data, error} = await client.from('categories').upsert(requestBody).select()
+    const {data, error} = await client.from('taskLists').upsert(requestBody).select()
 
     return {data, error}
   }

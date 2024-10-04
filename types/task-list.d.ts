@@ -1,12 +1,12 @@
-export interface CategoryModel {
+export interface TaskListModel {
   id: number,
   board_id: number,
   title: string,
-  settings: CategorySettingsModel,
+  settings: TaskListSettingsModel,
   created_at: string
 }
 
-export interface CategorySettingsModel {
+export interface TaskListSettingsModel {
   position: {
     x: number,
     y: number
