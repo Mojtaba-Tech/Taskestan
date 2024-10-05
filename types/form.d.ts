@@ -29,6 +29,7 @@ export interface PublicButtonModel {
 export interface PublicColorPickerModel {
     hasLabel?: boolean,
     labelText?: string,
+    showAlpha?: boolean,
     customClassList?: string[],
     id?: string,
 }

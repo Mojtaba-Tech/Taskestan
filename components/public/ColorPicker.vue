@@ -1,28 +1,41 @@
 <template>
-	<div class="mb-1">
+	<div v-if="hasLabel" class="mb-1">
 		<label
-			v-if="hasLabel"
 			:for="id"
 			class="text-gray-600 font-semibold"
 		>{{ labelText }}</label>
 	</div>
-	<el-color-picker
-		v-model="model"
-		:predefine="predefineColors"
-		show-alpha
-		:class="customClassList"
-		:id="id"
-	></el-color-picker>
+	<div class="relative">
+		<el-color-picker
+			ref="colorPicker"
+			v-model="model"
+			:predefine="predefineColors"
+			:show-alpha="showAlpha"
+			:class="[
+				customClassList,
+				$slots.default && '!absolute w-0 h-0 opacity-0 -top-2 left-1/2'
+			]"
+			:id="id"
+			@blur="emit('on-blur')"
+		></el-color-picker>
+		<slot name="default" :showColorPicker="colorPicker?.show"/>
+	</div>
 </template>
 
 <script setup lang="ts">
 import type {PublicColorPickerModel} from "~/types/form";
+import type {ColorPickerInstance} from "element-plus";
+
+const emit = defineEmits(['on-blur']);
+
+withDefaults(defineProps<PublicColorPickerModel>(), {
+	hasLabel: true,
+	showAlpha: false
+})
 
 const model: Ref<string> = defineModel({required: true});
 
-withDefaults(defineProps<PublicColorPickerModel>(), {
-	hasLabel: true
-})
+const colorPicker = ref() as Ref<ColorPickerInstance>;
 
 const predefineColors = [
 	'#ff4500',
@@ -32,14 +45,11 @@ const predefineColors = [
 	'#00ced1',
 	'#1e90ff',
 	'#c71585',
-	'rgba(255, 69, 0, 0.68)',
-	'rgb(255, 120, 0)',
-	'hsv(51, 100, 98)',
-	'hsva(120, 40, 94, 0.5)',
-	'hsl(181, 100%, 37%)',
-	'hsla(209, 100%, 56%, 0.73)',
-	'#c7158577',
 ]
+
+watch(() => colorPicker.value?.color.value, (newColor, oldColor) => {
+	if(oldColor) model.value = newColor;
+})
 </script>
 
 <style scoped>

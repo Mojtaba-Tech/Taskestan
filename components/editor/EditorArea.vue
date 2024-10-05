@@ -2,7 +2,7 @@
 	<section
 		id="editor_area"
 		class="h-[calc(100vh-104px)] overflow-hidden px-2"
-		:class="isEditorBgDotsActive && 'has-dots-bg'"
+		:class="settings.editor.bgPattern === 'dots' && 'has-dots-bg'"
 	>
 		
 		<div
@@ -27,10 +27,11 @@
 </template>
 
 <script setup lang="ts">
-// settings store
+import type {SettingsModel} from "~/types/settings";
+
 const settingsStore = useSettingsStore()
 const settingsStoreRefs = storeToRefs(settingsStore)
-const isEditorBgDotsActive = settingsStoreRefs.isEditorBgDotsActive
+const settings = settingsStoreRefs.settings as Ref<SettingsModel>
 
 // make editor draggable using useEditorDraggable composable
 const editorStore = useEditorStore()
