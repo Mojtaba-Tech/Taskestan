@@ -7,7 +7,10 @@
 		
 		<!-- Page Content -->
 		<main class="px-1.5 pb-1.5">
-			<section class="rounded-lg bg-white p-2 min-h-[calc(100vh-44px)] shadow-1 border border-black/10">
+			<section
+				class="rounded-lg bg-white p-2 min-h-[calc(100vh-44px)] shadow-1 border border-black/10"
+				:style="{backgroundColor: settings.editor.bgColor ? `${settings.editor.bgColor} !important` : ''}"
+			>
 				<slot/>
 			</section>
 		</main>
@@ -25,10 +28,16 @@ import type {BoardModel} from "~/types/board";
 
 const route = useRoute()
 
+// board store
 const boardStore = useBoardStore()
 const boardStoreRefs = storeToRefs(boardStore)
 const boards = boardStoreRefs.boards;
 const editorSelectedBoard = boardStoreRefs.editorSelectedBoard;
+
+// settings store
+const settingsStore = useSettingsStore()
+const settingsStoreRefs = storeToRefs(settingsStore)
+const settings = settingsStoreRefs.settings;
 
 // load boards and set selected board in editor
 const loadBoards = async () => {
@@ -37,17 +46,15 @@ const loadBoards = async () => {
 	setEditorSelectedBoard(parseInt(route.params.boardId as string))
 }
 
-onMounted(() => {
-	loadBoards()
-})
-
 const setEditorSelectedBoard = (boardId: number) => {
 	editorSelectedBoard.value = boards.value.find((board) => board.id === boardId) as BoardModel
 }
 
+onMounted(loadBoards)
+
 watch(
 	() => route.params.boardId,
-	(newBoardId, oldBoardId) => {
+	(newBoardId) => {
 		setEditorSelectedBoard(parseInt(newBoardId as string))
 	}
 )

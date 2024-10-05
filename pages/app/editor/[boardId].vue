@@ -9,6 +9,10 @@
 definePageMeta({
 	layout: 'editor-layout'
 })
+
+const settingsStore = useSettingsStore()
+
+onBeforeMount(async () => await settingsStore.getSettings())
 </script>
 
 <style scoped>

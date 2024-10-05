@@ -6,10 +6,10 @@
 			popper-class="no-arrow custom-popper-1"
 		>
 			<button
-				class="flex items-center justify-between border border-blue-600 w-12 h-7 rounded-md px-1.5 shadow-2 outline-none"
+				class="flex items-center justify-between bg-white border border-blue-600 w-12 h-7 rounded-md px-1.5 shadow-2 outline-none"
 			>
 				<img
-					src="@/assets/images/editor-dropdown-icon.png"
+					src="@/assets/images/editor-default-avatar-icon.png"
 					class="w-4 h-4"
 					alt="editor dropdown icon"
 				/>
