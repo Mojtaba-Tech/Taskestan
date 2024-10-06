@@ -33,21 +33,20 @@
 				
 				<!-- Right Side -->
 				<div>
-					<PublicColorPicker
-						v-model="settings.editor.bgColor"
-						show-alpha
-						:has-label="false"
-						@on-blur="settingsStore.upsertSettings()"
-					>
-						<template v-slot:default="{showColorPicker}" >
-							<img
-								@click="showColorPicker()"
-								src="@/assets/images/change-background-icon.png"
-								class="w-6 h-6 cursor-pointer hover:saturate-150 transition"
-								alt="change background icon"
-							/>
-						</template>
-					</PublicColorPicker>
+					<label class="relative">
+						<input
+							v-model="settings.editor.bgColor"
+							type="color"
+							@blur="colorPickerBlurred"
+							@input="isBgColorChanged = true"
+							class="absolute left-0 top-0 w-6 h-6 opacity-0"
+						>
+						<img
+							src="@/assets/images/change-background-icon.png"
+							class="w-6 h-6 cursor-pointer hover:saturate-150 transition"
+							alt="change background icon"
+						/>
+					</label>
 				
 				</div>
 				<!-- End Right Side -->
@@ -68,10 +67,19 @@
 const isNoteCreateModalVisible = ref(false)
 const isTaskListCreateModalVisible = ref(false)
 
+const isBgColorChanged = ref(false)
+
 // settings store
 const settingsStore = useSettingsStore()
 const settingsStoreRefs = storeToRefs(settingsStore)
 const settings = settingsStoreRefs.settings;
+
+const colorPickerBlurred = () => {
+	if(!isBgColorChanged.value) return; // update database if bgColor has been changed
+	
+	settingsStore.upsertSettings()
+	isBgColorChanged.value = false; // reset
+}
 </script>
 
 <style scoped>
