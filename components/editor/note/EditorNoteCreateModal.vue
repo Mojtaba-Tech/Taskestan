@@ -87,7 +87,7 @@ async function submitForm() {
 					y: Math.ceil(Math.random() * 200 + editorArea.value.scrollTop)
 				},
 				color: {
-					bg: form.value.backgroundColor,
+					bg: `${form.value.backgroundColor}BF`, // Add static alpha 75% to background color
 					text: form.value.textColor
 				}
 			},

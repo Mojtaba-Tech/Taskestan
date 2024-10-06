@@ -16,7 +16,10 @@
 				$slots.default && '!absolute w-0 h-0 opacity-0 -top-2 left-1/2'
 			]"
 			:id="id"
-			@blur="emit('on-blur')"
+			@active-change="emit('active-change', colorPicker?.color)"
+			@change="emit('change', colorPicker?.color)"
+			@focus="emit('focus', colorPicker?.color)"
+			@blur="emit('blur', colorPicker?.color)"
 		></el-color-picker>
 		<slot name="default" :showColorPicker="colorPicker?.show"/>
 	</div>
@@ -26,7 +29,7 @@
 import type {PublicColorPickerModel} from "~/types/form";
 import type {ColorPickerInstance} from "element-plus";
 
-const emit = defineEmits(['on-blur']);
+const emit = defineEmits(['active-change', 'change', 'focus', 'blur']);
 
 withDefaults(defineProps<PublicColorPickerModel>(), {
 	hasLabel: true,
@@ -46,10 +49,6 @@ const predefineColors = [
 	'#1e90ff',
 	'#c71585',
 ]
-
-watch(() => colorPicker.value?.color.value, (newColor, oldColor) => {
-	if(oldColor) model.value = newColor;
-})
 </script>
 
 <style scoped>
