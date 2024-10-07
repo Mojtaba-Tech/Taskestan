@@ -24,13 +24,15 @@ path {
 	transition: all 0.3s;
 }
 
-.group\/svg:hover .group-hover\/svg\:hovered path {
-	&[fill] {
-		fill: v-bind(colorHover);
-	}
-	
-	&[stroke] {
-		stroke: v-bind(colorHover);
+.group\/svg:hover .group-hover\/svg\:hovered {
+	path {
+		&[fill] {
+			fill: v-bind(colorHover);
+		}
+		
+		&[stroke] {
+			stroke: v-bind(colorHover);
+		}
 	}
 }
 </style>
