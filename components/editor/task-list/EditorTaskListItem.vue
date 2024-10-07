@@ -71,8 +71,8 @@ const startDrag = (e: MouseEvent) => {
 
 const drag = (e: MouseEvent) => {
 	position.value = {
-		x: (e.clientX - offset.x) < 6 ? 6 : e.clientX - offset.x,
-		y: (e.clientY - offset.y) < 6 ? 6 : e.clientY - offset.y,
+		x: (e.clientX - offset.x) < 2 ? 2 : e.clientX - offset.x,
+		y: (e.clientY - offset.y) < -9 ? -9 : e.clientY - offset.y,
 	};
 };
 

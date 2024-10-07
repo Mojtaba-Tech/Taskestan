@@ -2,7 +2,7 @@
 	<div>
 		
 		<!-- Fixed Action Bar -->
-		<section class="fixed bottom-10 left-1/2 -translate-x-1/2 w-[400px] h-16 z-50 bg-white rounded-xl shadow-3 border border-black/25 hover:bg-gray-50/95 transition">
+		<section class="fixed bottom-10 left-1/2 -translate-x-1/2 w-[400px] h-16 z-50 bg-white rounded-xl shadow-3 border border-black/25 hover:bg-white/90 transition">
 			<div class="flex justify-between items-center pl-8 pr-6 h-full">
 				
 				<!-- Left Side Actions -->
