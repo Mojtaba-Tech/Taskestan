@@ -18,3 +18,21 @@ withDefaults(defineProps<IconModel>(), {
 	strokeWidth: 1.5
 })
 </script>
+
+<style scoped>
+path {
+	transition: all 0.3s;
+}
+
+.group\/svg:hover .group-hover\/svg\:hovered {
+	path {
+		&[stroke] {
+			stroke: v-bind(colorHover);
+		}
+		
+		&[fill] {
+			fill: v-bind(colorHover);
+		}
+	}
+}
+</style>

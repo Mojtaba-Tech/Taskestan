@@ -1,4 +1,4 @@
-import type {EditorSettingsModel, SettingsModel} from "~/types/settings";
+import type {SettingsModel} from "~/types/settings";
 
 export const useSettingsStore = defineStore('settings', () => {
   const settings = ref<SettingsModel>({
