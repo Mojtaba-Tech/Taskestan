@@ -1,6 +1,6 @@
 import {serverSupabaseClient} from "#supabase/server";
 import {Database, TablesInsert} from "~/types/database.types";
-import moment from "moment";
+import dayjs from "dayjs";
 
 export default defineEventHandler(async (event) => {
   const client = await serverSupabaseClient<Database>(event)
@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
     const requestBody: TablesInsert<'settings'> = {
       user_id: user.id,
       settings,
-      updated_at: moment().format('YYYY-MM-DD HH:mm:ss')
+      updated_at: dayjs().format("YYYY-MM-DD HH:mm:ss")
     }
 
     const {data, error} = await client.from('settings').upsert(requestBody).select()
