@@ -1,8 +1,8 @@
 <template>
 	<button
 	  :type="type"
-	  class="rounded-small transition px-10 py-2"
-	  :class="[...themeCssClassList, ...customClassList]"
+	  class="rounded-md transition"
+	  :class="[...themeCssClassList, ...customClassList, ...sizeCssClassList]"
 	  @click.prevent="clicked"
 	>
 		{{ buttonText }}
@@ -19,8 +19,8 @@ defineOptions({
 const props = withDefaults(defineProps<PublicButtonModel>(), {
 	type: 'button',
 	theme: 'primary',
+	size: 'md',
 	customClassList: () => [],
-	buttonText: 'button text',
 	clicked: () => ''
 })
 
@@ -30,7 +30,29 @@ switch (props.theme) {
 		themeCssClassList = ['bg-blue-700', 'text-white', 'hover:bg-blue-600']
 		break;
 	case 'success':
-		themeCssClassList = ['bg-green-700', 'text-white', 'hover:bg-green-600']
+		themeCssClassList = ['bg-success-800', 'text-white', 'hover:bg-success-700']
+		break;
+	case 'light':
+		themeCssClassList = ['bg-white', 'text-gray-700', 'hover:bg-gray-50', 'shadow-4']
+		break;
+}
+
+let sizeCssClassList: string[] = []
+switch (props.size) {
+	case 'xs':
+		sizeCssClassList = ['px-2.5', 'py-1', 'text-13'];
+		break;
+	case 'sm':
+		sizeCssClassList = ['px-3', 'py-1.5', 'text-sm'];
+		break;
+	case 'md':
+		sizeCssClassList = ['px-4', 'py-2', 'text-md'];
+		break;
+	case 'lg':
+		sizeCssClassList = ['px-6', 'py-2.5', 'text-lg'];
+		break;
+	case 'xl':
+		sizeCssClassList = ['px-8', 'py-3', 'text-xl'];
 		break;
 }
 </script>

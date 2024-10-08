@@ -1,48 +1,79 @@
 <template>
 	<div>
-			<section class="flex flex-wrap">
+		
+			<header class="text-right p-3">
+				<PublicButton
+					button-text="New Board"
+					theme="light"
+					size="xs"
+					:clicked="() => isBoardCreateModalVisible = true"
+				/>
+			</header>
+			
+			<section class="pt-20 pb-8 px-[264px]">
 				
-				<!-- Add New Board Button -->
-				<div
-					class="flex justify-center items-center text-cyan-800 hover:bg-cyan-800 hover:text-white transition cursor-pointer rounded-medium w-[calc((100%/5)-16px)] h-64 p-4 border-4 border-cyan-800 mb-3 mr-4"
-					@click="isBoardCreateModalVisible = true"
-				>
-					<div class="text-center">
-						<font-awesome :icon="faPlus" size="2x"/>
-						<h3 class="mt-2 text-xl">Add new board</h3>
-					</div>
-				</div>
-				<!-- End Add New Board Button -->
+				<!-- Header -->
+				<header class="mb-6">
+					<h1 class="text-gray-900 text-xl mb-1">Boards</h1>
+					<p class="text-13 text-gray-500">
+						You can find a comprehensive collection of all the Boards in this section.
+						<span>Last modified 2 mins ago</span>
+					</p>
+				</header>
+				<!-- End Header -->
 				
-				<!-- Board Items -->
-				<template
-					v-if="!isGetBoardsLoading"
-					v-for="(board, index) in boards"
-				>
-					<NuxtLink
-						:to="{name: 'app-editor-boardId', params: {boardId: board.id}}"
-						class="flex flex-col justify-end bg-white hover:bg-black/5 transition rounded-medium w-[calc((100%/5)-16px)] h-64 p-4 border border-black/15 shadow-1 mb-3 mr-4 cursor-pointer"
-					>
-						<h2 class="text-sm text-gray-600">{{ board.title }}</h2>
-						<p
-							v-if="board.updated_at"
-							class="text-gray-400"
-						>Last modified {{ $dayjs(board.updated_at).fromNow() }}</p>
-					</NuxtLink>
-				</template>
-				<!-- End Board Items -->
-				
-				<!-- Loading -->
-				<template v-else>
-					<div class="flex items-center bg-white/80 rounded-medium w-[calc((100%/5)-16px)] h-64 p-4 border border-gray-300 mb-3 mr-4 cursor-pointer">
-						<Vue3Lottie
-							:animationLink="loadingJsonURL"
-							:width="208"
-							:height="256"
+				<!-- Search Boards -->
+				<section class="mb-11">
+					
+					<!-- Search Input -->
+					<div class="relative">
+						<IconsSearch
+							class="absolute top-1/2 -translate-y-1/2 ml-3.5"
+							color="#424245"
+						/>
+						<input
+							type="search"
+							class="w-full py-2 pl-10 pr-2 outline-none border border-darkgray-100/60 rounded-md transition focus:bg-gray-50/60"
+							placeholder="Search boards"
 						/>
 					</div>
-				</template>
-				<!-- End Loading -->
+					<!-- End Search Input -->
+					
+				</section>
+				<!-- End Search Boards -->
+				
+				<!-- Board Items -->
+				<section class="flex flex-wrap justify-start -mx-1.5">
+					<template
+						v-if="!isGetBoardsLoading"
+						v-for="(board, index) in boards"
+					>
+						<div class="flex flex-col justify-end w-[calc((100%/3)-12px)] mx-1.5 mb-4">
+							<NuxtLink
+								:to="{name: 'app-editor-boardId', params: {boardId: board.id}}"
+								class="flex flex-col justify-between bg-white hover:bg-gray-100/20 transition rounded-md h-32 p-4 shadow-4 mb-2 cursor-pointer"
+							>
+								<span class="text-3xl">🎨</span>
+								<h2 class="text-sm text-gray-900">{{ board.title }}</h2>
+							</NuxtLink>
+							<p class="text-xs text-gray-300 ml-4">Created {{ $dayjs(board.created_at).fromNow() }}</p>
+						</div>
+					</template>
+					
+					<!-- Loading -->
+					<template v-else>
+						<div class="flex flex-col justify-end w-[calc((100%/3)-12px)] mb-4 bg-white/80 rounded-medium h-32 p-4 shadow-4">
+							<Vue3Lottie
+								:animationLink="loadingJsonURL"
+								:width="208"
+								:height="256"
+							/>
+						</div>
+					</template>
+					<!-- End Loading -->
+					
+				</section>
+				<!-- End Board Items -->
 			
 			</section>
 			
@@ -56,13 +87,12 @@
 </template>
 
 <script setup lang="ts">
-import {faPlus} from '@fortawesome/free-solid-svg-icons'
 import {Vue3Lottie} from "vue3-lottie";
 
 definePageMeta({
 	layout: 'board-layout',
 })
-// console.log("Routes", useRouter().getRoutes())
+
 const isBoardCreateModalVisible = ref(false)
 
 const loadingJsonURL = new URL('~/assets/lottie/loading.json', import.meta.url)?.href
@@ -71,11 +101,4 @@ const boardStore = useBoardStore()
 const boardStoreRefs = storeToRefs(boardStore)
 const boards = boardStoreRefs.boards
 const isGetBoardsLoading = boardStoreRefs.isGetBoardsLoading;
-
-onMounted(async () => {
-	boardStore.getBoards()
-	// isGetBoardsLoading.value = true;
-	// boards.value = await $fetch('/api/boards', {method: "GET"})
-	// isGetBoardsLoading.value = false;
-})
 </script>

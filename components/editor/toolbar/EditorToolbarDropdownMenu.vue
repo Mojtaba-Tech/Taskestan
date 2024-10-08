@@ -3,7 +3,7 @@
 		<el-dropdown
 			trigger="click"
 			placement="bottom-end"
-			popper-class="no-arrow custom-popper-1"
+			popper-class="no-arrow custom-popper-1 !top-20"
 		>
 			<button
 				class="flex items-center justify-between bg-white border border-blue-600 w-12 h-7 rounded-md px-1.5 shadow-2 outline-none"
