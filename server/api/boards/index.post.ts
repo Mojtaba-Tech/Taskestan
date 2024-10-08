@@ -3,7 +3,7 @@ import type {Database, TablesInsert} from "~/types/database.types";
 
 export default defineEventHandler(async (event) => {
     const client = await serverSupabaseClient<Database>(event)
-    const {title, brief, description} = await readBody(event)
+    const {title, brief, description, emoji} = await readBody(event)
     const { data: { user } } = await client.auth.getUser()
 
     if(user) {
@@ -11,7 +11,8 @@ export default defineEventHandler(async (event) => {
             owner_id: user.id,
             title,
             brief,
-            description
+            description,
+            emoji
         }
 
         const {data, error} = await client.from('boards').upsert(requestBody).select();

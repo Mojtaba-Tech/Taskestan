@@ -2,6 +2,7 @@
 // @ts-ignore
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  extends: ['nuxt-emoji'],
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxtjs/google-fonts',

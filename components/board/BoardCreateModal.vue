@@ -44,6 +44,23 @@
 							  v-model="form.description"
 							/>
 						</div>
+						<div class="mb-5">
+							<PublicEmojiPicker
+								v-model="form.emoji"
+								label-text="Emoji"
+								id="emoji"
+							>
+								<template #button="{emoji, id}">
+									<button
+										type="button"
+										:id="id"
+										class="border border-gray-300 rounded-md w-12 h-12 text-3xl"
+									>
+										{{emoji}}
+									</button>
+								</template>
+							</PublicEmojiPicker>
+						</div>
 						<PublicButton
 							type="submit"
 							:clicked="submitForm"
@@ -63,22 +80,24 @@ const isBoardCreateVisible: Ref<boolean> = defineModel('isBoardCreateVisible', {
 
 const createBoardForm = ref()
 
-let form = {
+let form = ref({
 	title: '',
 	brief: '',
-	description: ''
-}
+	description: '',
+	emoji: '💪'
+})
 
 const boardStore = useBoardStore()
 
 async function submitForm() {
-	if(form.title) {
-		await boardStore.createBoard(form)
+	if(form.value.title) {
+		await boardStore.createBoard(form.value)
 		
-		form = {
+		form.value = {
 			title: '',
 			brief: '',
-			description: ''
+			description: '',
+			emoji: '💪'
 		}
 		
 		isBoardCreateVisible.value = false;

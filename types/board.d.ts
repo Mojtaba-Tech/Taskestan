@@ -3,6 +3,7 @@ export interface BoardModel {
     title: string,
     brief: string,
     description: string,
+    emoji: string,
     order: number,
     owner_id: string,
     settings: object | null,
