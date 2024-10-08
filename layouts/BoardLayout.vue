@@ -1,14 +1,14 @@
 <template>
-	<div class="bg-gray-50">
+	<div class="bg-gray-50/50">
 		
 		<!-- Navigation -->
-		<BoardLayoutNavigation/>
+		<BoardLayoutNavigation :boards="boards" :isGetBoardsLoading="isGetBoardsLoading" />
 		<!-- End Navigation -->
 		
 		<!-- Page Content -->
-		<main class="px-1.5 pb-1.5">
-			<section class="rounded-lg bg-white p-16 min-h-[calc(100vh-44px)] shadow-1 border border-black/10">
-				<slot/>
+		<main class="pr-1.5 py-1.5 ml-[270px]">
+			<section class="rounded-lg bg-white h-[calc(100vh-12px)] overflow-x-auto shadow-4">
+				<slot />
 			</section>
 		</main>
 		<!-- End Page Content -->
@@ -17,4 +17,12 @@
 </template>
 
 <script setup>
+const boardStore = useBoardStore()
+const boardStoreRefs = storeToRefs(boardStore)
+const boards = boardStoreRefs.boards
+const isGetBoardsLoading = boardStoreRefs.isGetBoardsLoading;
+
+onMounted(async () => {
+	boardStore.getBoards()
+})
 </script>

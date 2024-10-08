@@ -4,10 +4,6 @@
     .el-popper__arrow {
       display: none;
     }
-
-    &[aria-hidden="false"][data-popper-placement="bottom-end"] {
-      top: 80px !important;
-    }
   }
 
   &.custom-popper-1 {

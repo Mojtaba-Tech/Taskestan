@@ -20,10 +20,11 @@ export interface PublicTextareaModel {
 
 export interface PublicButtonModel {
     buttonText: string,
-    type: 'button' | 'submit' | 'reset',
-    theme: 'primary' | 'success' | 'warning' | 'danger',
-    customClassList: string[],
-    clicked: () => void
+    type?: 'button' | 'submit' | 'reset',
+    theme?: 'primary' | 'success' | 'warning' | 'danger' | 'light',
+    size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl',
+    customClassList?: string[],
+    clicked?: () => void
 }
 
 export interface PublicColorPickerModel {

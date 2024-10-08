@@ -4,12 +4,12 @@ export default {
   theme: {
     colors: {
       gray: {
-        50: '#EBEDF0',
+        50: '#F1F2F4',
         100: '#DCDDE5',
         200: '#C6C7CE',
         300: '#9A9BA0',
         400: '#848589',
-        500: '#848589',
+        500: '#6E6F73',
         600: '#58585C',
         700: '#424245',
         800: '#2C2C2E',
@@ -137,7 +137,8 @@ export default {
       boxShadow: {
         1: '0px 0px 2px 0px rgba(0, 0, 0, 0.06)',
         2: '0px 0.5px 1px 0px rgba(0, 0, 0, 0.20)',
-        3: '0px 1px 2px 0px rgba(0, 0, 0, 0.06)'
+        3: '0px 1px 2px 0px rgba(0, 0, 0, 0.06)',
+        4: '0px 0.5px 2px 0px rgba(0, 0, 0, 0.24), 0px 0px 0px 0.5px rgba(0, 0, 0, 0.12)'
       },
       fontSize: {
         13: '13px'
