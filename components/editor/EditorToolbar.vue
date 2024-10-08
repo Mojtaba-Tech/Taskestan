@@ -1,12 +1,16 @@
 <template>
-	<section class="flex justify-end items-center pb-4 select-none">
+	<section class="relative flex justify-center items-center pb-4 select-none">
 		
-		<!-- Toolbar Sections -->
-		<section class="flex items-center ">
-			<EditorToolbarBackgroundDotsToggle />
-			<EditorToolbarDropdownMenu />
+		<!-- Board Selector Dropdown -->
+		<EditorBoardSelectorDropdown/>
+		<!-- End Board Selector Dropdown -->
+		
+		<!-- Background Dots Toggle & Dropdown Menu Sections -->
+		<section class="absolute right-2 flex items-center">
+			<EditorToolbarBackgroundDotsToggle/>
+			<EditorToolbarDropdownMenu/>
 		</section>
-		<!-- End Toolbar Sections -->
+		<!-- End Background Dots Toggle & Dropdown Menu Sections -->
 	
 	</section>
 </template>

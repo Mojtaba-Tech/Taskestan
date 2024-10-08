@@ -1,7 +1,7 @@
 <template>
 	<section
 		id="editor_area"
-		class="h-[calc(100vh-104px)] overflow-hidden px-2"
+		class="h-[calc(100vh-82px)] overflow-hidden px-2"
 		:class="settings.editor.bgPattern === 'dots' && 'has-dots-bg'"
 	>
 		
