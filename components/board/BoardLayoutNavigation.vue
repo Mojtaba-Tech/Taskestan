@@ -35,7 +35,7 @@
 					:to="`/app/editor/${board.id}`"
 					class="group/svg flex items-center pl-2 pr-3 hover:bg-gray-50 cursor-pointer transition rounded-md text-brand-600"
 				>
-					<span class="text-lg">{{ ['🫥', '🤐', '🎊', '🎉', '🎮', '🥎', '🎩', '🎨'][index] }}</span>
+					<span class="text-lg">{{ board.emoji }}</span>
 					<span class="text-gray-700 group-hover/svg:text-gray-900 text-13 leading-3 transition ml-2">
 						{{ board.title }}
 					</span>

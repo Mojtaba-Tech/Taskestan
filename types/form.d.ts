@@ -35,6 +35,12 @@ export interface PublicColorPickerModel {
     id?: string,
 }
 
+export interface PublicEmojiPickerModel {
+    id: string,
+    hasLabel: boolean,
+    labelText: string
+}
+
 export type InputTypesModel =
     | 'button'
     | 'checkbox'

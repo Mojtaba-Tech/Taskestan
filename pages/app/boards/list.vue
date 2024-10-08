@@ -53,7 +53,7 @@
 								:to="{name: 'app-editor-boardId', params: {boardId: board.id}}"
 								class="flex flex-col justify-between bg-white hover:bg-gray-100/20 transition rounded-md h-32 p-4 shadow-4 mb-2 cursor-pointer"
 							>
-								<span class="text-3xl">🎨</span>
+								<span class="text-3xl">{{ board.emoji }}</span>
 								<h2 class="text-sm text-gray-900">{{ board.title }}</h2>
 							</NuxtLink>
 							<p class="text-xs text-gray-300 ml-4">Created {{ $dayjs(board.created_at).fromNow() }}</p>
