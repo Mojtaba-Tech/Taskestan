@@ -1,9 +1,12 @@
+import type {TaskModel} from "~/types/task";
+
 export interface TaskListModel {
   id: number,
   board_id: number,
   title: string,
   settings: TaskListSettingsModel,
-  created_at: string
+  created_at: string,
+  tasks: TaskModel[]
 }
 
 export interface TaskListSettingsModel {

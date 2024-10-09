@@ -6,11 +6,12 @@
 	>{{ labelText }}</label>
 	<input
 		v-model="model"
-		class="border-2 transition w-full outline-0 rounded-small py-2 px-2.5"
+		class="border-2 transition w-full outline-0 rounded-small py-2 px-2.5 disabled:bg-gray-100 disabled:opacity-50"
 	  :class="[...themeCssClassList, ...customClassList]"
 	  :type="type"
 	  :id="id"
 	  :placeholder="placeholder"
+		v-bind="$attrs"
 	/>
 </template>
 
