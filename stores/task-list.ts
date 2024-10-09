@@ -29,12 +29,8 @@ export const useTaskListStore = defineStore('taskLists', () => {
       .then((response: any) => {
         taskLists.value.push(response.data[0])
       })
-      .catch((error) => {
-        console.log(error)
-      })
-      .finally(() => {
-        isCreateTaskListLoading.value = false
-      })
+      .catch((error) => console.log(error))
+      .finally(() => isCreateTaskListLoading.value = false)
   }
 
   const updateTaskListPosition = (requestBody: {taskListId: number, settings: TaskListSettingsModel}) => {
@@ -43,9 +39,7 @@ export const useTaskListStore = defineStore('taskLists', () => {
     $fetch('/api/task-lists/position', {method: 'PUT', body: requestBody})
       .then((response) => {})
       .catch((error) => console.log(error))
-      .finally(() => {
-        isUpdateTaskListPositionLoading.value = false
-      })
+      .finally(() => isUpdateTaskListPositionLoading.value = false)
   }
 
   return {
