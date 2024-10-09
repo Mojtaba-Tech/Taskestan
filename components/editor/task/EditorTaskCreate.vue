@@ -3,7 +3,7 @@
 		<PublicInput
 			v-model="taskTitle"
 			placeholder="Enter Task title..."
-			id="title"
+			:id="`editor_task_${taskListId}`"
 			:has-label="false"
 			:custom-class-list="['mb-2']"
 			@keyup.enter="createTask"

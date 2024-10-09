@@ -21,7 +21,7 @@
 				</h2>
 			</div>
 			<div
-				@click="isCreateTaskVisible = !isCreateTaskVisible"
+				@click="toggleCreateTaskVisibility"
 				class="group/svg cursor-pointer p-1 mr-1"
 			>
 				<IconsPlus
@@ -43,24 +43,24 @@
 		</Transition>
 		<!-- End Task Create Input -->
 		
-		<!-- Tasks List -->
+		<!-- Tasks -->
 		<section>
 			
 			<!-- Task Item -->
-			<template v-for="i in 2">
-				<EditorTaskItem :color="'purple'"/>
-			</template>
+			<EditorTaskItem
+				v-for="(task, index) in taskList.tasks"
+				:task="task"
+				:key="index"
+			/>
 			<!-- End Task Item -->
 		
 		</section>
-		<!-- End Tasks List -->
+		<!-- End Tasks -->
 	
 	</div>
 </template>
 
 <script setup lang="ts">
-import {storeToRefs} from "pinia";
-import {onBeforeUnmount, ref} from "vue";
 import type {TaskListModel, TaskListSettingsModel} from "~/types/task-list";
 
 const props = defineProps<{
@@ -78,7 +78,7 @@ const position = ref({
 	y: props.taskList.settings.position.y
 });
 
-let startPositionSnapshot: {x: number, y: number};
+let startPositionSnapshot: { x: number, y: number };
 
 let offset = {x: 0, y: 0};
 let zIndex = ref(1);
@@ -112,7 +112,7 @@ const stopDrag = () => {
 	document.removeEventListener('mouseup', stopDrag);
 	
 	// Prevent API call when position has not changed
-	if(
+	if (
 		startPositionSnapshot.x !== position.value.x ||
 		startPositionSnapshot.y !== position.value.y
 	) {
@@ -124,6 +124,14 @@ const updateTaskListPosition = () => {
 	const settings = {...props.taskList.settings}
 	settings.position = {x: position.value.x, y: position.value.y}
 	props.updateTaskListPosition({taskListId: props.taskList.id, settings})
+}
+
+const toggleCreateTaskVisibility = () => {
+	isCreateTaskVisible.value = !isCreateTaskVisible.value;
+	
+	setTimeout(() => {
+		document.getElementById(`editor_task_${props.taskList.id}`)?.focus()
+	}, 1)
 }
 
 onBeforeUnmount(() => {
