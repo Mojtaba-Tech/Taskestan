@@ -27,6 +27,7 @@ export const useTaskListStore = defineStore('taskLists', () => {
 
     return $fetch('/api/task-lists', {method: 'POST', body: requestBody})
       .then((response: any) => {
+        response.data[0].settings.zIndex = 1000;
         taskLists.value.push({...response.data[0], tasks: []})
       })
       .catch((error) => console.log(error))

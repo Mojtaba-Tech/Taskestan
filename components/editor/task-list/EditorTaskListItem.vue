@@ -1,11 +1,11 @@
 <template>
 	<div
-		class="absolute w-64 select-none mr-4"
-		:style="{ top: position.y + 'px', left: position.x + 'px', zIndex }"
+		class="absolute w-64 select-none"
+		:style="{ top: position.y + 'px', left: position.x + 'px', zIndex: taskList.settings.zIndex }"
 		@mousedown="startDrag"
 		data-element-role="taskList"
 	>
-		
+
 		<!-- Header -->
 		<header class="inline-flex justify-between items-center w-full mb-2">
 			<div class="flex justify-between items-center mr-20">
@@ -81,7 +81,6 @@ const position = ref({
 let startPositionSnapshot: { x: number, y: number };
 
 let offset = {x: 0, y: 0};
-let zIndex = ref(1);
 
 const startDrag = (e: MouseEvent) => {
 	startPositionSnapshot = {
@@ -89,7 +88,6 @@ const startDrag = (e: MouseEvent) => {
 		y: position.value.y,
 	}
 	
-	zIndex.value++;
 	isDraggingSomething.value = true;
 	offset = {
 		x: e.clientX - position.value.x,
@@ -102,7 +100,7 @@ const startDrag = (e: MouseEvent) => {
 const drag = (e: MouseEvent) => {
 	position.value = {
 		x: (e.clientX - offset.x) < 2 ? 2 : e.clientX - offset.x,
-		y: (e.clientY - offset.y) < -9 ? -9 : e.clientY - offset.y,
+		y: (e.clientY - offset.y) < -4 ? -4 : e.clientY - offset.y,
 	};
 };
 
