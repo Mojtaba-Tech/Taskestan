@@ -5,15 +5,18 @@
 		@mousedown="startDrag"
 		data-element-role="taskList"
 	>
-
+		
 		<!-- Header -->
 		<header class="inline-flex justify-between items-center w-full mb-2">
 			<div class="flex justify-between items-center mr-20">
-				<div class="group/svg p-1 mr-2.5">
+				<div
+					@click.prevent="toggleTaskListHeight"
+					class="group/svg p-1 mr-2.5 transform transition-all"
+				>
 					<IconsArrowDown
 						color="#58585C"
 						color-hover="#44AAFF"
-						class="group-hover/svg:hovered"
+						class="group-hover/svg:hovered pointer-events-none"
 					/>
 				</div>
 				<h2 class="text-13 text-gray-700 whitespace-nowrap leading-3">
@@ -44,7 +47,11 @@
 		<!-- End Task Create Input -->
 		
 		<!-- Tasks -->
-		<section>
+		<section
+			:id="`tasks_${taskList.id}`"
+			class="overflow-y-hidden transition-all duration-500"
+			data-collapsed="false"
+		>
 			
 			<!-- Task Item -->
 			<EditorTaskItem
@@ -67,6 +74,10 @@ const props = defineProps<{
 	taskList: TaskListModel,
 	updateTaskListPosition: ({taskListId, settings}: { taskListId: number, settings: TaskListSettingsModel }) => void
 }>()
+
+const taskStore = useTaskStore()
+const taskStoreRefs = storeToRefs(taskStore)
+const isCreateTaskLoading = taskStoreRefs.isCreateTaskLoading
 
 const isCreateTaskVisible = ref(false)
 
@@ -132,10 +143,38 @@ const toggleCreateTaskVisibility = () => {
 	}, 1)
 }
 
+const toggleTaskListHeight = (event: MouseEvent) => {
+	const taskListElement = document.getElementById(`tasks_${props.taskList.id}`) as HTMLElement
+	(event.target as HTMLElement).classList.toggle('rotate-x-180')
+	
+	if (taskListElement.getAttribute('data-collapsed') === 'false') {
+		taskListElement.setAttribute('data-collapsed', 'true')
+		taskListElement.style.height = `${taskListElement.scrollHeight}px`;
+		
+		setTimeout(() => {
+			taskListElement.style.height = '0';
+		}, 1)
+	} else {
+		taskListElement.setAttribute('data-collapsed', 'false')
+		taskListElement.style.height = '0';
+		
+		setTimeout(() => {
+			taskListElement.style.height = `${taskListElement.scrollHeight}px`;
+		}, 1)
+	}
+}
+
 onBeforeUnmount(() => {
 	document.removeEventListener('mousemove', drag);
 	document.removeEventListener('mouseup', stopDrag);
 });
+
+watch(isCreateTaskLoading, () => {
+	if(!isCreateTaskLoading.value) {
+		const taskListElement = document.getElementById(`tasks_${props.taskList.id}`) as HTMLElement
+		taskListElement.style.height = `${taskListElement.scrollHeight}px`;
+	}
+})
 </script>
 
 <style scoped>
