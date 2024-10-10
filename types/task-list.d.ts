@@ -14,4 +14,5 @@ export interface TaskListSettingsModel {
     x: number,
     y: number
   }
+  zIndex: number
 }
