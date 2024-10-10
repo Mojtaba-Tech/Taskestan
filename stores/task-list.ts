@@ -27,7 +27,7 @@ export const useTaskListStore = defineStore('taskLists', () => {
 
     return $fetch('/api/task-lists', {method: 'POST', body: requestBody})
       .then((response: any) => {
-        taskLists.value.push(response.data[0])
+        taskLists.value.push({...response.data[0], tasks: []})
       })
       .catch((error) => console.log(error))
       .finally(() => isCreateTaskListLoading.value = false)
